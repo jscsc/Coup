@@ -18,8 +18,8 @@ class GamePiece : public BoardObject
 	Util::PlayerType owner;
 	Kinematic target;
 	Arrive arrive;
-	bool active;
-	bool selected;
+	bool active = false;
+	bool selected = false;
 
 
 public:

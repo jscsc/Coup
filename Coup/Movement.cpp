@@ -30,6 +30,11 @@ void Movement::render(sf::RenderWindow &window)
 	window.draw(rect);
 }
 
+void Movement::setPosition(float x, float y)
+{
+	rect.setPosition(sf::Vector2f(x, y));
+}
+
 Movement::Movement() : Ability(), type(Util::FORWARD), rect(sf::Vector2f(50, 50))
 {
 	setCost(0);

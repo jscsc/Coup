@@ -7,6 +7,7 @@
 #include "GameOperation.h"
 #include "Diagonal.h"
 #include "GameMath.h"
+#include <iostream>
 
 GameManager::GameManager(PlayerData & playerData, GameData & gameData, sf::RenderWindow &window) :
 	playerData(playerData), gameData(gameData), window(window)
@@ -35,6 +36,7 @@ GameManager::~GameManager()
 
 void GameManager::playerLogic()
 {
+	//std::cout << playerData.pieceMoving << std::endl;
 	if (gameData.currentTurn == playerData.type && !playerData.pieceMoving)
 		selectState();
 }
@@ -69,7 +71,7 @@ void GameManager::gameLogic()
 		if (piece.isActive() && GameMath::mag(piece.kinematic.velocity) > 0.0f)
 			atleastOneMoveing = true;
 
-	playerData.pieceMoving = true;
+	playerData.pieceMoving = atleastOneMoveing;
 
 
 }
@@ -157,9 +159,9 @@ bool GameManager::handelGamePieceSelection()
 	for (GamePiece& piece : playerData.pieces) {
 		if (piece.body.getGlobalBounds().contains(mousePosition)) {
 			if (playerData.currentGamePiece != nullptr)
-				playerData.currentGamePiece->setActive(false);
+				playerData.currentGamePiece->setSelected(false);
 			playerData.currentGamePiece = &piece;
-			playerData.currentGamePiece->setActive(true);
+			playerData.currentGamePiece->setSelected(true);
 			return true;
 		}
 	}
@@ -196,11 +198,13 @@ void GameManager::render()
 		if (piece.isActive())
 			piece.render(window);
 
-	//float x = 300.0f;
-	//float y = 700.0f;
-	//for (Movement *movement : playerData.movements) {
-		//if (movement->isActive()) {
-			window.draw(playerData.movements[0]->rect);
-		//}
-	//}
+	float x = 300.0f;
+	float y = 700.0f;
+	for (Movement *movement : playerData.movements) {
+		if (movement->isActive()) {
+			movement->setPosition(x, y);
+			movement->render(window);
+			x += 100;
+		}
+	}
 }

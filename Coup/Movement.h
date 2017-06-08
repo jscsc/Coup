@@ -19,6 +19,7 @@ public:
 
 	bool validate(BoardNode &currentNode, GamePiece &currentPiece);
 	void render(sf::RenderWindow &window);
+	void setPosition(float x, float y);
 	Movement();
 	Movement(Util::MovementType type);
 	~Movement();

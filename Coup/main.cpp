@@ -24,9 +24,13 @@ int main()
 
 	playerData.type = Util::PLAYER_ONE;
 	playerData.points = 4;
-	playerData.movements.push_back(&LeftOrRight());
-	playerData.movements.push_back(&Diagonal());
-	playerData.movements.push_back(&Back());
+	playerData.pieceMoving = false;
+	LeftOrRight leftOrRight;
+	Diagonal diagonal;
+	Back back;
+	playerData.movements.push_back(&leftOrRight);
+	playerData.movements.push_back(&diagonal);
+	playerData.movements.push_back(&back);
 	
 
 	GameData gameData;
@@ -36,7 +40,7 @@ int main()
 
 	// Create game pieces
 	GamePiece pieceOne(Util::PLAYER_TWO, 300, 600, 4, 0, 10.0f);
-	GamePiece pieceTwo(Util::PLAYER_TWO, 300, 600, 4, 2, 10.0f);
+	GamePiece pieceTwo(Util::PLAYER_TWO, 500, 600, 4, 2, 10.0f);
 
 	playerData.pieces.push_back(pieceOne);
 	playerData.pieces.push_back(pieceTwo);
@@ -60,35 +64,30 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 
-			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left)
+			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 				gameData.mouseClicked = true;
+			}
 		}
 
 		/// GAME LOGIC
-		//gameManager.playerLogic();
+		gameManager.playerLogic();
 
-		//gameManager.gameLogic();
+		gameManager.gameLogic();
 
 		/// DRAW
 		window.clear();
 
-		//gameManager.render();
+		gameManager.render();
 
-		sf::RectangleShape rect(sf::Vector2f(100, 100));
-		rect.setPosition(sf::Vector2f(300, 700));
-		rect.setFillColor(sf::Color::Green);
-		//window.draw(rect);
 
-		//LeftOrRight *testPointer;
+		/*PlayerData testData;
 
-		//LeftOrRight test;
+		LeftOrRight test;
+		Diagonal testTwo;
 
-		//testPointer = &test;
+		testData.movements.push_back(new LeftOrRight());
 
-		//window.draw(testPointer->rect);
-
-		//std::cout << playerData.movements[0]->getCost() << std::endl;
-		//window.draw(playerData.movements[0]->rect);
+		window.draw(testData.movements[0]->rect);*/
 
 		window.display();
 	}
