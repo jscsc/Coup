@@ -28,6 +28,9 @@ SteeringOutput Arrive::getSteering()
 
 	float distance = GameMath::mag(direction);
 
+	//std::cout << distance << std::endl;
+	//std::cout << target.position.x << " " <<  target.position.y << std::endl;
+	//std::cout << character.position.x << " " << character.position.y << std::endl;
 
 	float targetSpeed;
 
@@ -35,9 +38,11 @@ SteeringOutput Arrive::getSteering()
 	if (distance < targetRadius)
 		targetSpeed = 0;
 	// If we are outside teh slowRadius, then go max speed
-	else if (distance > slowRadius)
+	else if (distance > slowRadius) {
 		targetSpeed = maxSpeed;
-	// Otherwise calculate a scaled speed
+		//std::cout << "well, I got hit, my postion right now is x: "  << character.position.x <<  " y: " << character.position.y  << std::endl;
+		// Otherwise calculate a scaled speed
+	} 
 	else
 		targetSpeed = maxSpeed * (distance / slowRadius);
 

@@ -16,8 +16,8 @@ class GamePiece : public BoardObject
 
 	sf::RenderWindow &window;
 	Util::PlayerType owner;
-	Kinematic target;
 	Arrive arrive;
+	Kinematic target;
 	bool active = false;
 	bool selected = false;
 

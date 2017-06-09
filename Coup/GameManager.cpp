@@ -61,13 +61,13 @@ void GameManager::selectState()
 void GameManager::gameLogic()
 {
 	// move every active player piece
-	for (GamePiece piece : playerData.pieces)
+	for (GamePiece &piece : playerData.pieces)
 		if (piece.isActive())
 			piece.move();
 
 	// check and see if any pieces are moving
 	bool atleastOneMoveing = false;
-	for (GamePiece piece : playerData.pieces) 
+	for (GamePiece &piece : playerData.pieces) 
 		if (piece.isActive() && GameMath::mag(piece.kinematic.velocity) > 0.0f)
 			atleastOneMoveing = true;
 
@@ -127,7 +127,7 @@ bool GameManager::handelBoardNodeSelection()
 	for (BoardNode &node : nodes) {
 		if (node.body.getGlobalBounds().contains(mousePosition)) {
 			if (playerData.currentGamePiece != nullptr && node.isValid()) {
-				playerData.currentGamePiece->setArriveTarget(node.kinematic.position.x, node.kinematic.position.y);
+				//playerData.currentGamePiece->setArriveTarget(node.kinematic.position.x, node.kinematic.position.y);
 				// TODO set up node references in gamepieces
 				resetBoard();
 				// reduce player points based on movement cost
@@ -139,8 +139,9 @@ bool GameManager::handelBoardNodeSelection()
 				// set new row and col for game peice
 				playerData.currentGamePiece->setRow(node.getRow());
 				playerData.currentGamePiece->setColumn(node.getColumn());
+				playerData.currentGamePiece->setMovementTargetPosition(node.kinematic.position.x, node.kinematic.position.y);
 				// reset current game peice pointer
-				playerData.currentGamePiece->setActive(false);
+				playerData.currentGamePiece->setSelected(false);
 				playerData.currentGamePiece = nullptr;
 
 				return true;

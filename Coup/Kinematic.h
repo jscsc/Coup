@@ -6,7 +6,7 @@
 struct SteeringOutput;
 class Kinematic
 {
-	const float MAX_SPEED = 5.0f;
+	const float MAX_SPEED = 0.5f;
 
 public:
 

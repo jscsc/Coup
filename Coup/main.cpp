@@ -25,6 +25,7 @@ int main()
 	playerData.type = Util::PLAYER_ONE;
 	playerData.points = 4;
 	playerData.pieceMoving = false;
+	playerData.currentGamePiece = nullptr;
 	LeftOrRight leftOrRight;
 	Diagonal diagonal;
 	Back back;
@@ -39,8 +40,8 @@ int main()
 	gameData.mouseClicked = false;
 
 	// Create game pieces
-	GamePiece pieceOne(Util::PLAYER_TWO, 300, 600, 4, 0, 10.0f);
-	GamePiece pieceTwo(Util::PLAYER_TWO, 500, 600, 4, 2, 10.0f);
+	GamePiece pieceOne(Util::PLAYER_ONE, 300, 600, 4, 0, 10.0f);
+	GamePiece pieceTwo(Util::PLAYER_ONE, 500, 600, 4, 2, 10.0f);
 
 	playerData.pieces.push_back(pieceOne);
 	playerData.pieces.push_back(pieceTwo);
@@ -65,29 +66,27 @@ int main()
 				window.close();
 
 			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-				gameData.mouseClicked = true;
+				//gameData.mouseClicked = true;
+				playerData.pieces[0].setMovementTargetPosition((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
+				pieceOne.setMovementTargetPosition((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
 			}
 		}
 
 		/// GAME LOGIC
-		gameManager.playerLogic();
+		//gameManager.playerLogic();
 
-		gameManager.gameLogic();
+		playerData.pieces[0].move();
+		pieceOne.move();
+
+		//gameManager.gameLogic();
 
 		/// DRAW
 		window.clear();
 
-		gameManager.render();
+		playerData.pieces[0].render(window);
+		pieceOne.render(window);
 
-
-		/*PlayerData testData;
-
-		LeftOrRight test;
-		Diagonal testTwo;
-
-		testData.movements.push_back(new LeftOrRight());
-
-		window.draw(testData.movements[0]->rect);*/
+		//gameManager.render();
 
 		window.display();
 	}
