@@ -8,7 +8,7 @@ BoardNode::BoardNode() : BoardObject()
 }
 
 BoardNode::BoardNode(float x, float y, int row, int column, float size) : BoardObject(row, column),
-valid(false), occupied(false), body(size)
+valid(false), assignment(Util::NEUTRAL), body(size)
 {
 	body.setFillColor(sf::Color::Blue);
 	body.setOrigin(body.getRadius(), body.getRadius());
@@ -38,14 +38,14 @@ bool BoardNode::isValid()
 	return valid;
 }
 
-void BoardNode::setOccupied(bool occupied)
+Util::PlayerType BoardNode::getAssignment()
 {
-	this->occupied = occupied;
+	return assignment;
 }
 
-bool BoardNode::isOccupied()
+void BoardNode::setAissignment(Util::PlayerType assignment)
 {
-	return occupied;
+	this->assignment = assignment;
 }
 
 

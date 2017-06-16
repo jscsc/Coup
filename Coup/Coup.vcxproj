@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="AIManager.cpp" />
     <ClCompile Include="Arrive.cpp" />
     <ClCompile Include="Back.cpp" />
     <ClCompile Include="BackDiagonal.cpp" />
@@ -163,7 +164,9 @@
     <ClCompile Include="DiagonalSuper.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="GameOperation.cpp" />
+    <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="GameMath.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -178,10 +181,13 @@
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="Super.cpp" />
+    <ClCompile Include="ToggleButton.cpp" />
+    <ClCompile Include="UIData.cpp" />
     <ClCompile Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
+    <ClInclude Include="AIManager.h" />
     <ClInclude Include="Arrive.h" />
     <ClInclude Include="Back.h" />
     <ClInclude Include="BackDiagonal.h" />
@@ -192,7 +198,9 @@
     <ClInclude Include="DiagonalSuper.h" />
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="GameOperation.h" />
+    <ClInclude Include="MenuButton.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="GameMath.h" />
     <ClInclude Include="GameObject.h" />
@@ -208,6 +216,8 @@
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="Super.h" />
+    <ClInclude Include="ToggleButton.h" />
+    <ClInclude Include="UIData.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Coup.rc" />

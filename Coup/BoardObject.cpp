@@ -18,6 +18,7 @@ BoardObject::~BoardObject()
 
 void BoardObject::setRow(int row)
 {
+	this->row = row;
 }
 
 int BoardObject::getRow()
@@ -27,6 +28,7 @@ int BoardObject::getRow()
 
 void BoardObject::setColumn(int column)
 {
+	this->column = column;
 }
 
 int BoardObject::getColumn()

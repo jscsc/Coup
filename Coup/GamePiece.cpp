@@ -3,8 +3,8 @@
 #include <iostream>
 
 GamePiece::GamePiece(Util::PlayerType owner, float x, float y, int row, int column, float size)
-	: BoardObject(row, column), MAX_ACCELERATION(2.0f), MAX_SPEED(0.5f), TARGET_RADIUS(2.0f),
-	SLOW_RADIUS(100.0f), window(window), owner(owner), target(), body(size), selected(false), active(true),
+	: BoardObject(row, column), MAX_ACCELERATION(2.0f), MAX_SPEED(0.5f), TARGET_RADIUS(0.5f),
+	SLOW_RADIUS(100.0f), window(window), owner(owner), target(), body(size), selected(false), active(true), onBoard(false),
 	arrive(kinematic, target, MAX_ACCELERATION, MAX_SPEED, TARGET_RADIUS, SLOW_RADIUS)
 {
 	kinematic.position.x = x;
@@ -70,5 +70,15 @@ bool GamePiece::isActive()
 bool GamePiece::isSelected()
 {
 	return selected;
+}
+
+bool GamePiece::isOnBoard()
+{
+	return onBoard;
+}
+
+bool GamePiece::setOnBoard(bool onBoard)
+{
+	return this->onBoard = onBoard;
 }
 

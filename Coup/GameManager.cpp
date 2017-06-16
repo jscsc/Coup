@@ -1,56 +1,44 @@
 #include "GameManager.h"
-#include "Movement.h"
 #include "PlayerData.h"
 #include "GameData.h"
+#include "UIData.h"
 #include "BoardNode.h"
 #include "GamePiece.h"
-#include "GameOperation.h"
-#include "Diagonal.h"
-#include "GameMath.h"
-#include <iostream>
 
-GameManager::GameManager(PlayerData & playerData, GameData & gameData, sf::RenderWindow &window) :
-	playerData(playerData), gameData(gameData), window(window)
+
+
+
+GameManager::GameManager(PlayerData & playerOne, PlayerData & playerTwo, GameData & gameData, UIData & UI, sf::RenderWindow & window)
+	: playerOne(playerOne), playerTwo(playerTwo), gameData(gameData), UI(UI), window(window)
 {
-	float down = 200.0f;
-	float right = 300.0f;
-	for (int i = 0; i < 5; ++i)
-	{
-		for (int j = 0; j < 5; ++j)
-		{
-			nodes.push_back(BoardNode(right, down, i, j, 15.0f));
-			right += 100;
-		}
-
-		right = 300;
-		down += 100;
-	}
-
-	movementMap[Util::DIAGONAL] = &Diagonal();
-
 }
 
 GameManager::~GameManager()
 {
 }
 
-void GameManager::playerLogic()
+void GameManager::gameLogic()
 {
-	//std::cout << playerData.pieceMoving << std::endl;
-	if (gameData.currentTurn == playerData.type && !playerData.pieceMoving)
-		selectState();
+	if (gameData.currentTurn == Util::PLAYER_ONE) {
+		selectGameState(playerOne);
+	} else {
+		selectGameState(playerTwo);
+	}
 }
 
-void GameManager::selectState()
+void GameManager::selectGameState(PlayerData & playerData)
 {
 	switch (gameData.currentGameState)
 	{
 
-		case Util::SETUP:
-			handelSetup();
+		case Util::ABILITY_SETUP:
+			handelGameAbilitySetup(playerData);
+			break;
+		case Util::POSITION_SETUP:
+			handelGamePositionSetup(playerData);
 			break;
 		case Util::GAMEPLAY:
-			handelGameplay();
+			handelGameGameplay(playerData);
 			break;
 		default:
 			break;
@@ -58,146 +46,103 @@ void GameManager::selectState()
 	}
 }
 
-void GameManager::gameLogic()
+void GameManager::handelGameAbilitySetup(PlayerData & playerData)
 {
-	// move every active player piece
-	for (GamePiece &piece : playerData.pieces)
-		if (piece.isActive())
-			piece.move();
-
-	// check and see if any pieces are moving
-	bool atleastOneMoveing = false;
-	for (GamePiece &piece : playerData.pieces) 
-		if (piece.isActive() && GameMath::mag(piece.kinematic.velocity) > 0.0f)
-			atleastOneMoveing = true;
-
-	playerData.pieceMoving = atleastOneMoveing;
-
-
-}
-
-void GameManager::handelSetup()
-{
-
-}
-
-void GameManager::handelGameplay()
-{
-	// Be sure the player actually clicked something;
-	if (!gameData.mouseClicked)
-		return;
-
-	// Check and see if any nodes have been clicked on
-	if (handelBoardNodeSelection())
-		return;
-
-	// Check and see if the player has updated their abilities
-	if (handelAbilitySelection())
-		return;
-
-	// Check and see if the player updated their current gamePiece
-	if (handelGamePieceSelection())
-		return;
-
-}
-
-bool GameManager::handelAbilitySelection()
-{
-	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
-	sf::Mouse::getPosition(window);
-
-	for (Movement* movement : playerData.movements) {
-		if (movement->rect.getGlobalBounds().contains(mousePosition)) {
-			if (playerData.currentMovement != nullptr)
-				playerData.currentMovement->setSelected(false);
-			playerData.currentMovement = movement;
-			playerData.currentMovement->setSelected(true);
-			validateBoard();
-			return true;
-		}
-	}
-	return false;
-}
-
-bool GameManager::handelBoardNodeSelection()
-{
-	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
-	sf::Mouse::getPosition(window);
-
-	for (BoardNode &node : nodes) {
-		if (node.body.getGlobalBounds().contains(mousePosition)) {
-			if (playerData.currentGamePiece != nullptr && node.isValid()) {
-				//playerData.currentGamePiece->setArriveTarget(node.kinematic.position.x, node.kinematic.position.y);
-				// TODO set up node references in gamepieces
-				resetBoard();
-				// reduce player points based on movement cost
-				playerData.points -= playerData.currentMovement->getCost();
-				// deactive current movmenet
-				playerData.currentMovement->setActive(false);
-				//reset pointer
-				playerData.currentMovement = nullptr;
-				// set new row and col for game peice
-				playerData.currentGamePiece->setRow(node.getRow());
-				playerData.currentGamePiece->setColumn(node.getColumn());
-				playerData.currentGamePiece->setMovementTargetPosition(node.kinematic.position.x, node.kinematic.position.y);
-				// reset current game peice pointer
-				playerData.currentGamePiece->setSelected(false);
-				playerData.currentGamePiece = nullptr;
-
-				return true;
-
-			}
-		}
-	}
-	return false;
-}
-
-bool GameManager::handelGamePieceSelection()
-{
-	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
-	sf::Mouse::getPosition(window);
-
-	for (GamePiece& piece : playerData.pieces) {
-		if (piece.body.getGlobalBounds().contains(mousePosition)) {
-			if (playerData.currentGamePiece != nullptr)
-				playerData.currentGamePiece->setSelected(false);
-			playerData.currentGamePiece = &piece;
-			playerData.currentGamePiece->setSelected(true);
-			return true;
-		}
-	}
-	return false;
-}
-
-void GameManager::validateBoard()
-{
-	if (playerData.currentGamePiece == nullptr) {
-		resetBoard();
-		return;
-	}
-
-	for (BoardNode &node : nodes) {
-		
-		node.setValid( playerData.currentMovement->validate(node, *playerData.currentGamePiece));
-
+	// If both players have made their selections, move to the next state
+	if (playerOne.ready == true && playerTwo.ready == true) {
+		gameData.currentGameState = Util::POSITION_SETUP;
 	}
 }
 
-void GameManager::resetBoard()
+void GameManager::handelGamePositionSetup(PlayerData & playerData)
 {
-	for (BoardNode &node : nodes)
-		node.setValid(false);
+	
+}
+
+void GameManager::handelGameGameplay(PlayerData & playerData)
+{
+
 }
 
 void GameManager::render()
 {
-	
-	for (BoardNode node : nodes)
+	if (gameData.currentTurn == Util::PLAYER_ONE) {
+		selectRenderState(playerOne);
+	}
+	else {
+		selectRenderState(playerTwo);
+	}
+}
+
+void GameManager::selectRenderState(PlayerData & playerData)
+{
+	switch (gameData.currentGameState)
+	{
+
+		case Util::ABILITY_SETUP:
+			renderAbilitySetup(playerData);
+			break;
+		case Util::POSITION_SETUP:
+			renderPositionSetup(playerData);
+			break;
+		case Util::GAMEPLAY:
+			renderGameplay(playerData);
+			break;
+		default:
+			break;
+
+	}
+}
+
+void GameManager::renderAbilitySetup(PlayerData & playerData)
+{
+	// Render movments to select from
+	float x = 300.0f;
+	float y = 400.0f;
+	for (Movement *movement : UI.movementSelection) {
+		if (movement->isActive()) {
+			movement->setPosition(x, y);
+			movement->render(window);
+			x += 100;
+		}
+	}
+
+	// render ready button
+	UI.readyButton.render(window);
+
+	// render reset button
+	UI.resetSelectionButton.render(window);
+
+	// render current movements
+	x = 300.0f;
+	y = 700.0f;
+	for (Movement *movement : playerData.movements) {
+		if (movement->isActive()) {
+			movement->setPosition(x, y);
+			movement->render(window);
+			x += 100;
+		}
+	}
+}
+
+void GameManager::renderPositionSetup(PlayerData & playerData)
+{
+	for (BoardNode node : gameData.nodes)
 		node.render(window);
 
-	for (GamePiece piece : playerData.pieces)
-		if (piece.isActive())
-			piece.render(window);
+	for (GamePiece* piece : playerData.pieces)
+		if (piece->isActive())
+			piece->render(window);
+}
+
+void GameManager::renderGameplay(PlayerData & playerData)
+{
+	for (BoardNode node : gameData.nodes)
+		node.render(window);
+
+	for (GamePiece* piece : playerData.pieces)
+		if (piece->isActive())
+			piece->render(window);
 
 	float x = 300.0f;
 	float y = 700.0f;
@@ -209,3 +154,4 @@ void GameManager::render()
 		}
 	}
 }
+

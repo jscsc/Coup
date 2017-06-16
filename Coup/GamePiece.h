@@ -20,6 +20,7 @@ class GamePiece : public BoardObject
 	Kinematic target;
 	bool active = false;
 	bool selected = false;
+	bool onBoard = false;
 
 
 public:
@@ -35,6 +36,8 @@ public:
 	void setSelected(bool selected);
 	bool isActive();
 	bool isSelected();
+	bool isOnBoard();
+	bool setOnBoard(bool onBoard);
 
 };
 

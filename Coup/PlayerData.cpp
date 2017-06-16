@@ -1,4 +1,3 @@
-#include "Movement.h"
 #include "PlayerData.h"
 #include "GamePiece.h"
 
@@ -15,6 +14,8 @@ PlayerData::PlayerData(Util::PlayerType type) : type(type)
 
 PlayerData::~PlayerData()
 {
+	pieces.empty();
+	movements.empty();
 }
 
 void PlayerData::resetCurrentMovement()

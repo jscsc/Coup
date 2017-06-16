@@ -13,7 +13,8 @@
 #include "Diagonal.h"
 #include "PlayerData.h"
 #include "GameData.h"
-#include "GameManager.h"
+#include "PlayerManager.h"
+#include "UIData.h"
 int main()
 {
 	/// INITIAL VARIABLES
@@ -32,6 +33,8 @@ int main()
 	playerData.movements.push_back(&leftOrRight);
 	playerData.movements.push_back(&diagonal);
 	playerData.movements.push_back(&back);
+
+	PlayerData otherPlayerData;
 	
 
 	GameData gameData;
@@ -39,15 +42,17 @@ int main()
 	gameData.currentTurn = Util::PLAYER_ONE;
 	gameData.mouseClicked = false;
 
-	// Create game pieces
+	// Create game pieces 300, 600
 	GamePiece pieceOne(Util::PLAYER_ONE, 300, 600, 4, 0, 10.0f);
 	GamePiece pieceTwo(Util::PLAYER_ONE, 500, 600, 4, 2, 10.0f);
 
-	playerData.pieces.push_back(pieceOne);
-	playerData.pieces.push_back(pieceTwo);
+	playerData.pieces.push_back(&pieceOne);
+	playerData.pieces.push_back(&pieceTwo);
+
+	UIData UI;
 
 	// Create the game manager
-	GameManager  gameManager(playerData, gameData, window);
+	PlayerManager  gameManager(playerData, otherPlayerData, gameData, UI, window);
 
 
 	/// GAME LOOP
@@ -66,27 +71,19 @@ int main()
 				window.close();
 
 			if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-				//gameData.mouseClicked = true;
-				playerData.pieces[0].setMovementTargetPosition((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
-				pieceOne.setMovementTargetPosition((float)sf::Mouse::getPosition(window).x, (float)sf::Mouse::getPosition(window).y);
+				gameData.mouseClicked = true;
 			}
 		}
 
 		/// GAME LOGIC
-		//gameManager.playerLogic();
+		gameManager.playerLogic();
 
-		playerData.pieces[0].move();
-		pieceOne.move();
-
-		//gameManager.gameLogic();
+		gameManager.gameLogic();
 
 		/// DRAW
 		window.clear();
 
-		playerData.pieces[0].render(window);
-		pieceOne.render(window);
-
-		//gameManager.render();
+		gameManager.render();
 
 		window.display();
 	}

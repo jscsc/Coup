@@ -1,11 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "BoardObject.h"
+#include "Util.h"
 class BoardNode : public BoardObject
 {
 
 	bool valid = false;
-	bool occupied  = false;
+	Util::PlayerType assignment = Util::NEUTRAL;
 
 
 public:
@@ -17,8 +18,8 @@ public:
 	~BoardNode();
 	void setValid(bool valid);
 	bool isValid();
-	void setOccupied(bool occupied);
-	bool isOccupied();
+	Util::PlayerType getAssignment();
+	void setAissignment(Util::PlayerType assignment);
 	void render(sf::RenderWindow &window) override;
 };
 

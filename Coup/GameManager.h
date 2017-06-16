@@ -1,38 +1,39 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <vector>
-#include "Util.h"
-class Movement;
+
 struct PlayerData;
 struct GameData;
-class BoardNode;
+struct UIData;
 class GameManager
 {
 
-	PlayerData &playerData;
+	PlayerData &playerOne;
+
+	PlayerData &playerTwo;
 
 	GameData &gameData;
 
+	UIData &UI;
+
 	sf::RenderWindow &window;
 
-	std::vector< BoardNode > nodes;
-
-	std::map<Util::MovementType, Movement*> movementMap;
-
 public:
-	GameManager(PlayerData &playerData, GameData &gameData, sf::RenderWindow &window);
+	GameManager(PlayerData &playerOne, PlayerData &playerTwo, GameData &gameData, UIData &UI, sf::RenderWindow &window);
 	~GameManager();
 
-	void playerLogic();
-	void selectState();
 	void gameLogic();
-	void handelSetup();
-	void handelGameplay();
-	bool handelAbilitySelection();
-	bool handelBoardNodeSelection();
-	bool handelGamePieceSelection();
-	void validateBoard();
-	void resetBoard();
+
+	void selectGameState(PlayerData &playerData);
+
+	void handelGameAbilitySetup(PlayerData &playerData);
+	void handelGamePositionSetup(PlayerData &playerData);
+	void handelGameGameplay(PlayerData &playerData);
+
 	void render();
+	void selectRenderState(PlayerData &playerData);
+
+	void renderAbilitySetup(PlayerData &playerData);
+	void renderPositionSetup(PlayerData &playerData);
+	void renderGameplay(PlayerData &playerData);
 };
 

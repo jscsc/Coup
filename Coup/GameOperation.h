@@ -1,11 +1,23 @@
 #pragma once
 #include "Util.h"
+#include <vector>
+class Movement;
+class BoardNode;
+struct PlayerData;
+struct GameData;
 class GameOperation
 {
 public:
 
 	static Util::MovementType combineMovement(Util::MovementType currentType, Util::MovementType additionalType);
 	static Util::MovementType separateMovement(Util::MovementType currentType, Util::MovementType removalType);
+	static void validatePositionSetupBoard(std::vector< BoardNode > &nodes, PlayerData &playerData);
+	static void addMovement(PlayerData &playerData, Util::MovementType type);
+	static void resetBoard(std::vector< BoardNode > &nodes);
+	static void validateBoard(PlayerData &playerData, GameData &gameData);
+	static void executeMovement(PlayerData &playerData, BoardNode &node);
+	static void unassignNode(int row, int column, GameData &gameData);
+	static bool piecesAssigned(PlayerData &playerData);
 
 
 private:
