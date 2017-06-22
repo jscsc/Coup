@@ -8,7 +8,7 @@
 
 
 
-UIData::UIData()
+UIData::UIData() : readyButton(500, 200), resetSelectionButton(500, 300)
 {
 	movementSelection.push_back(new Stay());
 	movementSelection.push_back(new Back());

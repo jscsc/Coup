@@ -29,11 +29,6 @@ public:
 
 	void playerLogic();
 	void selectState();
-	void gameLogic();
-
-	void handelGameAbilitySetup();
-	void handelGamePositionSetup();
-	void handelGameGameplay();
 
 	void handelPlayerAbilitySetup();
 	bool handelAbilitySetupReadyButton();
@@ -49,13 +44,5 @@ public:
 	bool handelAbilitySelection();
 	bool handelBoardNodeSelection();
 	bool handelGamePieceSelection();
-
-	void validateBoard();
-	void resetBoard();
-
-	void render();
-	void renderAbilitySetup();
-	void renderPositionSetup();
-	void renderGameplay();
 };
 

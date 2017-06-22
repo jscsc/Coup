@@ -7,7 +7,7 @@ class MenuButton
 public:
 	sf::RectangleShape rect;
 
-	MenuButton();
+	MenuButton(float x, float y);
 	~MenuButton();
 	 virtual void render(sf::RenderWindow &window);
 };

@@ -18,6 +18,9 @@ public:
 	static void executeMovement(PlayerData &playerData, BoardNode &node);
 	static void unassignNode(int row, int column, GameData &gameData);
 	static bool piecesAssigned(PlayerData &playerData);
+	static void switchTrun(GameData &gameData);
+	static void pickRandomTurn(GameData &gameData);
+	static void handelPlayerMovements(PlayerData &playerData);
 
 
 private:

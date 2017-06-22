@@ -23,17 +23,10 @@ public:
 
 	void gameLogic();
 
-	void selectGameState(PlayerData &playerData);
-
-	void handelGameAbilitySetup(PlayerData &playerData);
-	void handelGamePositionSetup(PlayerData &playerData);
-	void handelGameGameplay(PlayerData &playerData);
-
-	void render();
-	void selectRenderState(PlayerData &playerData);
-
-	void renderAbilitySetup(PlayerData &playerData);
-	void renderPositionSetup(PlayerData &playerData);
-	void renderGameplay(PlayerData &playerData);
+	void handelGameAbilitySetup();
+	void handelGamePositionSetup();
+	void determineTurnComplete(PlayerData &playerData);
+	void handelGameGameplay();
+	void handelGameplayRules(PlayerData &playerData, PlayerData &otherPlayerData);
 };
 

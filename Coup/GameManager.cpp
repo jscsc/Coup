@@ -4,6 +4,9 @@
 #include "UIData.h"
 #include "BoardNode.h"
 #include "GamePiece.h"
+#include "GameOperation.h"
+#include "GameMath.h"
+#include <iostream>
 
 
 
@@ -19,26 +22,21 @@ GameManager::~GameManager()
 
 void GameManager::gameLogic()
 {
-	if (gameData.currentTurn == Util::PLAYER_ONE) {
-		selectGameState(playerOne);
-	} else {
-		selectGameState(playerTwo);
-	}
-}
+	GameOperation::handelPlayerMovements(playerOne);
+	GameOperation::handelPlayerMovements(playerTwo);
 
-void GameManager::selectGameState(PlayerData & playerData)
-{
+
 	switch (gameData.currentGameState)
 	{
 
 		case Util::ABILITY_SETUP:
-			handelGameAbilitySetup(playerData);
+			handelGameAbilitySetup();
 			break;
 		case Util::POSITION_SETUP:
-			handelGamePositionSetup(playerData);
+			handelGamePositionSetup();
 			break;
 		case Util::GAMEPLAY:
-			handelGameGameplay(playerData);
+			handelGameGameplay();
 			break;
 		default:
 			break;
@@ -46,112 +44,91 @@ void GameManager::selectGameState(PlayerData & playerData)
 	}
 }
 
-void GameManager::handelGameAbilitySetup(PlayerData & playerData)
+void GameManager::handelGameAbilitySetup()
 {
 	// If both players have made their selections, move to the next state
 	if (playerOne.ready == true && playerTwo.ready == true) {
 		gameData.currentGameState = Util::POSITION_SETUP;
+		GameOperation::pickRandomTurn(gameData);
+		playerOne.ready = false;
+		playerTwo.ready = false;
 	}
 }
 
-void GameManager::handelGamePositionSetup(PlayerData & playerData)
-{
-	
-}
-
-void GameManager::handelGameGameplay(PlayerData & playerData)
+void GameManager::handelGamePositionSetup()
 {
 
-}
-
-void GameManager::render()
-{
-	if (gameData.currentTurn == Util::PLAYER_ONE) {
-		selectRenderState(playerOne);
+	if (GameOperation::piecesAssigned(playerOne) && GameOperation::piecesAssigned(playerTwo)) {
+		GameOperation::switchTrun(gameData);
+		gameData.currentGameState = Util::GAMEPLAY;
+		playerOne.ready = false;
+		playerTwo.ready = false;
+		return;
 	}
-	else {
-		selectRenderState(playerTwo);
-	}
+
+	if (gameData.currentTurn == Util::PLAYER_ONE)
+		determineTurnComplete(playerOne);
+	else
+		determineTurnComplete(playerTwo);
+
 }
 
-void GameManager::selectRenderState(PlayerData & playerData)
+void GameManager::determineTurnComplete(PlayerData & playerData)
 {
-	switch (gameData.currentGameState)
-	{
-
-		case Util::ABILITY_SETUP:
-			renderAbilitySetup(playerData);
-			break;
-		case Util::POSITION_SETUP:
-			renderPositionSetup(playerData);
-			break;
-		case Util::GAMEPLAY:
-			renderGameplay(playerData);
-			break;
-		default:
-			break;
-
+	if (gameData.currentTurn == playerData.type && playerData.ready && !playerData.pieceMoving) {
+		GameOperation::switchTrun(gameData);
+		// This is what is breaking it
+		playerOne.ready = false;
+		playerTwo.ready = false;
 	}
 }
 
-void GameManager::renderAbilitySetup(PlayerData & playerData)
+void GameManager::handelGameGameplay()
 {
-	// Render movments to select from
-	float x = 300.0f;
-	float y = 400.0f;
-	for (Movement *movement : UI.movementSelection) {
-		if (movement->isActive()) {
-			movement->setPosition(x, y);
-			movement->render(window);
-			x += 100;
+	// TODO restart game when no more player pieces on board
+
+	if (gameData.currentTurn == Util::PLAYER_ONE)
+		handelGameplayRules(playerOne, playerTwo);
+	else
+		handelGameplayRules(playerTwo, playerOne);
+}
+
+void GameManager::handelGameplayRules(PlayerData & playerData, PlayerData &otherPlayerData)
+{
+	// If we hit someone, handle it
+	for (GamePiece * myPiece : playerData.pieces) {
+		for (GamePiece * otherPiece : otherPlayerData.pieces) {
+			if (myPiece->isActive() && otherPiece->isActive()) {
+				sf::Vector2f direction = myPiece->kinematic.position - otherPiece->kinematic.position;
+				float distance = GameMath::mag(direction);
+				if (distance < 5.0f) {
+					otherPiece->setActive(false);
+				}
+			}
 		}
 	}
 
-	// render ready button
-	UI.readyButton.render(window);
+	// If a game piece is on the last row for this player, log it as a score
+	int goalRow;
+	if (gameData.currentTurn == Util::PLAYER_ONE)
+		goalRow = 0;
+	else
+		goalRow = 4;
 
-	// render reset button
-	UI.resetSelectionButton.render(window);
-
-	// render current movements
-	x = 300.0f;
-	y = 700.0f;
-	for (Movement *movement : playerData.movements) {
-		if (movement->isActive()) {
-			movement->setPosition(x, y);
-			movement->render(window);
-			x += 100;
+	for (GamePiece* piece : playerData.pieces) {
+		if (piece->getRow() == goalRow && !playerData.pieceMoving) {
+			piece->setOnBoard(false);
+			piece->setActive(false);
+			playerData.score++;
 		}
 	}
+
+	determineTurnComplete(playerData);
+
 }
 
-void GameManager::renderPositionSetup(PlayerData & playerData)
-{
-	for (BoardNode node : gameData.nodes)
-		node.render(window);
 
-	for (GamePiece* piece : playerData.pieces)
-		if (piece->isActive())
-			piece->render(window);
-}
 
-void GameManager::renderGameplay(PlayerData & playerData)
-{
-	for (BoardNode node : gameData.nodes)
-		node.render(window);
 
-	for (GamePiece* piece : playerData.pieces)
-		if (piece->isActive())
-			piece->render(window);
 
-	float x = 300.0f;
-	float y = 700.0f;
-	for (Movement *movement : playerData.movements) {
-		if (movement->isActive()) {
-			movement->setPosition(x, y);
-			movement->render(window);
-			x += 100;
-		}
-	}
-}
 

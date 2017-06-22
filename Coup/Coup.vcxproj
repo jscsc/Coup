@@ -177,6 +177,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Stay.cpp" />
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="RenderableObject.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stay.h" />
     <ClInclude Include="SteeringBehavior.h" />

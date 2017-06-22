@@ -41,6 +41,7 @@ struct PlayerData
 	PlayerData(Util::PlayerType type);
 	~PlayerData();
 	void resetCurrentMovement();
+	void setupGamePieces();
 
 };
 

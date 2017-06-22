@@ -9,6 +9,9 @@
 #include "PlayerData.h"
 #include "GameData.h"
 #include "GamePiece.h"
+#include "GameMath.h"
+#include <iostream>
+#include <random>
 
 
 
@@ -32,7 +35,7 @@ void GameOperation::validatePositionSetupBoard(std::vector<BoardNode>& nodes, Pl
 		targetRow = 0;
 
 	for (BoardNode &node : nodes) {
-		if (node.getRow() == targetRow)
+		if (node.getRow() == targetRow && node.getAssignment() == Util::NEUTRAL)
 			node.setValid(true);
 		else
 			node.setValid(false);
@@ -45,18 +48,27 @@ void GameOperation::addMovement(PlayerData &playerData, Util::MovementType type)
 	{
 		case Util::BACK:
 			playerData.movements.push_back(new Back());
+			std::cout << "Adding Back" << std::endl;
 			break;
 		case Util::STAY:
 			playerData.movements.push_back(new Stay());
+			std::cout << "Adding Stay" << std::endl;
 			break;
 		case Util::LEFT_OR_RIGHT:
 			playerData.movements.push_back(new LeftOrRight());
+			std::cout << "Adding Left of Right" << std::endl;
 			break;
 		case Util::DIAGONAL:
 			playerData.movements.push_back(new Diagonal());
+			std::cout << "Adding Diagonal" << std::endl;
 			break;
 		case Util::SUPER:
 			playerData.movements.push_back(new Super());
+			std::cout << "Adding Super" << std::endl;
+			break;
+		case Util::FORWARD:
+			playerData.movements.push_back(new Movement());
+			std::cout << "Adding Forward" << std::endl;
 			break;
 		default:
 			break;
@@ -84,10 +96,15 @@ void GameOperation::validateBoard(PlayerData & playerData, GameData & gameData)
 
 void GameOperation::executeMovement(PlayerData & playerData, BoardNode & node)
 {
+	if (playerData.currentGamePiece == nullptr)
+		return;
+
+
 	playerData.currentGamePiece->setRow(node.getRow());
 	playerData.currentGamePiece->setColumn(node.getColumn());
 	playerData.currentGamePiece->setMovementTargetPosition(node.kinematic.position.x, node.kinematic.position.y);
 	playerData.points -= playerData.currentMovement->getCost();
+	playerData.currentMovement->setActive(false);
 	playerData.ready = true;
 	node.setAissignment(playerData.type);
 }
@@ -105,6 +122,44 @@ void GameOperation::unassignNode(int row, int column, GameData & gameData)
 bool GameOperation::piecesAssigned(PlayerData & playerData)
 {
 	return playerData.assignedPieces == playerData.pieces.size();
+}
+
+void GameOperation::switchTrun(GameData & gameData)
+{
+	if (gameData.currentTurn == Util::PLAYER_ONE)
+		gameData.currentTurn = Util::PLAYER_TWO;
+	else
+		gameData.currentTurn = Util::PLAYER_ONE;
+}
+
+void GameOperation::pickRandomTurn(GameData & gameData)
+{
+	std::random_device randomDevice; // Obtain a random number from hardware
+	std::mt19937 engine(randomDevice()); // seed the generator
+	std::uniform_int_distribution<> distribution(0, 1); // define the range
+	int randomInt = distribution(engine);
+
+	if (randomInt == 0)
+		gameData.currentTurn = Util::PLAYER_ONE;
+	else
+		gameData.currentTurn = Util::PLAYER_TWO;
+}
+
+void GameOperation::handelPlayerMovements(PlayerData & playerData)
+{
+
+	// move every active player piece
+	for (GamePiece* piece : playerData.pieces)
+		if (piece->isActive())
+			piece->move();
+
+	// check and see if any pieces are moving
+	bool atleastOneMoveing = false;
+	for (GamePiece* piece : playerData.pieces)
+		if (piece->isActive() && GameMath::mag(piece->kinematic.velocity) > 0.0f)
+			atleastOneMoveing = true;
+
+	playerData.pieceMoving = atleastOneMoveing;
 }
 
 GameOperation::GameOperation()

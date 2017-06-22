@@ -3,7 +3,8 @@
 
 
 
-GameData::GameData() : currentGameState(Util::ABILITY_SETUP)
+GameData::GameData() : currentGameState(Util::ABILITY_SETUP),
+currentTurn(Util::NEUTRAL), mouseClicked(true)
 {
 	float down = 200.0f;
 	float right = 300.0f;

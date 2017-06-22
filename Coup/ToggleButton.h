@@ -3,10 +3,10 @@
 class ToggleButton : public MenuButton
 {
 
-	bool toggled;
+	bool toggled = false;
 
 public:
-	ToggleButton();
+	ToggleButton(float x, float y);
 	~ToggleButton();
 	bool isToggled();
 	void setToggled(bool toggled);

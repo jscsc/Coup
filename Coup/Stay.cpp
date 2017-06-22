@@ -14,6 +14,7 @@ bool Stay::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int piec
 
 Stay::Stay() : Movement(Util::STAY)
 {
+	setCost(1);
 }
 
 

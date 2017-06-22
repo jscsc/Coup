@@ -14,45 +14,44 @@
 #include "PlayerData.h"
 #include "GameData.h"
 #include "PlayerManager.h"
+#include "AIManager.h"
+#include "GameManager.h"
 #include "UIData.h"
+#include "Renderer.h"
+
+#include <random>
 int main()
 {
 	/// INITIAL VARIABLES
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Coup");
 
-	// Create player manager
-	PlayerData playerData;
-
-	playerData.type = Util::PLAYER_ONE;
-	playerData.points = 4;
-	playerData.pieceMoving = false;
-	playerData.currentGamePiece = nullptr;
-	LeftOrRight leftOrRight;
-	Diagonal diagonal;
-	Back back;
-	playerData.movements.push_back(&leftOrRight);
-	playerData.movements.push_back(&diagonal);
-	playerData.movements.push_back(&back);
-
-	PlayerData otherPlayerData;
+	// Create player data
+	PlayerData playerData(Util::PLAYER_ONE);
 	
+	// Create AI data
+	PlayerData AIData(Util::PLAYER_TWO);
 
+	//for (GamePiece* piece : AIData.pieces)
+		//if (piece->isActive())
+			//std::cout << "This is good?" << std::endl;
+	
+	// Create the game data
 	GameData gameData;
-	gameData.currentGameState = Util::GAMEPLAY;
-	gameData.currentTurn = Util::PLAYER_ONE;
-	gameData.mouseClicked = false;
 
-	// Create game pieces 300, 600
-	GamePiece pieceOne(Util::PLAYER_ONE, 300, 600, 4, 0, 10.0f);
-	GamePiece pieceTwo(Util::PLAYER_ONE, 500, 600, 4, 2, 10.0f);
-
-	playerData.pieces.push_back(&pieceOne);
-	playerData.pieces.push_back(&pieceTwo);
-
+	// Create UI data
 	UIData UI;
 
+	// Create the player manager
+	PlayerManager playerManager(playerData, AIData, gameData, UI, window);
+
+	// Create the AI manager
+	AIManager AI(AIData, gameData, UI);
+
 	// Create the game manager
-	PlayerManager  gameManager(playerData, otherPlayerData, gameData, UI, window);
+	GameManager gameManager(playerData, AIData, gameData, UI, window);
+
+	// Create the renderer
+	Renderer renderer(playerData, AIData, gameData, UI, window);
 
 
 	/// GAME LOOP
@@ -76,14 +75,16 @@ int main()
 		}
 
 		/// GAME LOGIC
-		gameManager.playerLogic();
+		playerManager.playerLogic();
+
+		AI.AIPlayerLogic();
 
 		gameManager.gameLogic();
 
 		/// DRAW
 		window.clear();
 
-		gameManager.render();
+		renderer.render();
 
 		window.display();
 	}
