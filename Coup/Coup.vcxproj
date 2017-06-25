@@ -182,6 +182,7 @@
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="SteeringOutput.cpp" />
     <ClCompile Include="Super.cpp" />
+    <ClCompile Include="Textures.cpp" />
     <ClCompile Include="ToggleButton.cpp" />
     <ClCompile Include="UIData.cpp" />
     <ClCompile Include="Util.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="SteeringOutput.h" />
     <ClInclude Include="Super.h" />
+    <ClInclude Include="Textures.h" />
     <ClInclude Include="ToggleButton.h" />
     <ClInclude Include="UIData.h" />
   </ItemGroup>

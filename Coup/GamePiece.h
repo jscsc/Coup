@@ -30,6 +30,7 @@ public:
 	void render(sf::RenderWindow &window) override;
 	void move();
 	void setMovementTargetPosition(float x, float y);
+	void setPosition(float x, float y);
 	Util::PlayerType getType();
 	void setArriveTarget(float x, float y);
 	void setActive(bool active);
@@ -38,6 +39,9 @@ public:
 	bool isSelected();
 	bool isOnBoard();
 	bool setOnBoard(bool onBoard);
+
+private:
+	void setColor();
 
 };
 

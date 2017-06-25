@@ -4,7 +4,7 @@
 
 
 GameData::GameData() : currentGameState(Util::ABILITY_SETUP),
-currentTurn(Util::NEUTRAL), mouseClicked(true)
+currentTurn(Util::NEUTRAL), mouseClicked(true), exitReady(false), round(1)
 {
 	float down = 200.0f;
 	float right = 300.0f;
@@ -24,4 +24,27 @@ currentTurn(Util::NEUTRAL), mouseClicked(true)
 
 GameData::~GameData()
 {
+}
+
+void GameData::resetAll()
+{
+	currentGameState = Util::MAIN_MENU;
+	currentTurn = Util::NEUTRAL;
+	mouseClicked = false;
+	exitReady = false;
+	round = 1;
+	GameOperation::resetBoard(nodes);
+	for (BoardNode &node : nodes)
+		node.setAissignment(Util::NEUTRAL);
+}
+
+void GameData::resetRound()
+{
+	currentGameState = Util::ABILITY_SETUP;
+	currentTurn = Util::NEUTRAL;
+	mouseClicked = false;
+	exitReady = false;
+	GameOperation::resetBoard(nodes);
+	for (BoardNode &node : nodes)
+		node.setAissignment(Util::NEUTRAL);
 }

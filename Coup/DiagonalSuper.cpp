@@ -18,11 +18,11 @@ bool DiagonalSuper::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow,
 	return row && (leftColSide || rightColSide);
 }
 
-DiagonalSuper::DiagonalSuper() : Movement(Util::DIAGONAL_SUPER)
+DiagonalSuper::DiagonalSuper(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Movement(Util::DIAGONAL_SUPER, baseTexture, selectedTexture)
 {
 	setCost(5);
 }
-
 
 DiagonalSuper::~DiagonalSuper()
 {

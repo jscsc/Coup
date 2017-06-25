@@ -16,11 +16,12 @@ bool LeftOrRight::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, i
 	return left || right;
 }
 
-LeftOrRight::LeftOrRight() : Movement(Util::LEFT_OR_RIGHT)
+
+LeftOrRight::LeftOrRight(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Movement(Util::LEFT_OR_RIGHT, baseTexture, selectedTexture)
 {
 	setCost(1);
 }
-
 
 LeftOrRight::~LeftOrRight()
 {

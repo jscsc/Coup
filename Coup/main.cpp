@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include <exception>
 #include "main.h"
 #include "Movement.h"
 #include "BoardNode.h"
@@ -18,6 +19,7 @@
 #include "GameManager.h"
 #include "UIData.h"
 #include "Renderer.h"
+#include "Textures.h"
 
 #include <random>
 int main()
@@ -25,21 +27,28 @@ int main()
 	/// INITIAL VARIABLES
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Coup");
 
+	// Create Textrues
+	Textures textures;
+
 	// Create player data
-	PlayerData playerData(Util::PLAYER_ONE);
+	PlayerData playerData(Util::PLAYER_ONE, textures);
 	
 	// Create AI data
-	PlayerData AIData(Util::PLAYER_TWO);
-
-	//for (GamePiece* piece : AIData.pieces)
-		//if (piece->isActive())
-			//std::cout << "This is good?" << std::endl;
+	PlayerData AIData(Util::PLAYER_TWO, textures);
 	
 	// Create the game data
 	GameData gameData;
 
+	// Create font
+	sf::Font gameFont;
+
+	if (!gameFont.loadFromFile("Assets//Fonts//Roboto-Thin.ttf"))
+	{
+		throw "font failed to load";
+	}
+
 	// Create UI data
-	UIData UI;
+	UIData UI(textures, gameFont);
 
 	// Create the player manager
 	PlayerManager playerManager(playerData, AIData, gameData, UI, window);
@@ -53,6 +62,8 @@ int main()
 	// Create the renderer
 	Renderer renderer(playerData, AIData, gameData, UI, window);
 
+	// Start at menu, broken?
+	gameData.currentGameState = Util::MAIN_MENU;
 
 	/// GAME LOOP
 	while (window.isOpen())
@@ -82,7 +93,7 @@ int main()
 		gameManager.gameLogic();
 
 		/// DRAW
-		window.clear();
+		window.clear(sf::Color::White);
 
 		renderer.render();
 

@@ -34,5 +34,8 @@ public:
 	// Update method wihtout using delta time
 	void update(const SteeringOutput &steering);
 
+	// Reset the KKinematic
+	void reset();
+
 };
 

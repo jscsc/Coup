@@ -13,16 +13,19 @@ class Movement : public Ability
 protected:
 
 	Util::MovementType type; // <-- protected data member
+	sf::Texture &baseTexture;
+	sf::Texture &selectedTexture;
 
 public:
 	sf::RectangleShape rect;
+	sf::Sprite movementSprite;
 
 	bool validate(BoardNode &currentNode, GamePiece &currentPiece);
 	void render(sf::RenderWindow &window);
 	void setPosition(float x, float y);
 	Util::MovementType getMovementType();
-	Movement();
-	Movement(Util::MovementType type);
+	Movement(sf::Texture &baseTexture, sf::Texture &selectedTexture);
+	Movement(Util::MovementType type, sf::Texture &baseTexture, sf::Texture &selectedTexture);
 	~Movement();
 };
 

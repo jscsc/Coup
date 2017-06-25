@@ -12,11 +12,11 @@ bool Super::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int pie
 	return (nodeRow == pieceRow + 2) && (nodeColumn == pieceColumn);
 }
 
-Super::Super() : Movement(Util::SUPER)
+Super::Super(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Movement(Util::SUPER, baseTexture, selectedTexture)
 {
 	setCost(3);
 }
-
 
 Super::~Super()
 {

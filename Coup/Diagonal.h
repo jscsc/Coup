@@ -7,7 +7,7 @@ class Diagonal : public Movement
 	bool validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn) override;
 
 public:
-	Diagonal();
+	Diagonal(sf::Texture &baseTexture, sf::Texture &selectedTexture);
 	~Diagonal();
 };
 

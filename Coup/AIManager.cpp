@@ -113,9 +113,14 @@ void AIManager::handelAIGameplay()
 	std::mt19937 engine(randomDevice()); // seed the generator
 	std::uniform_int_distribution<> distribution(0, AIData.pieces.size() - 1); // define the range
 
+	// TODO Fix this logic, it selects pieces that are alrady dead
 	int randomInt = distribution(engine);
-
 	AIData.currentGamePiece = AIData.pieces[randomInt];
+
+	// This might of broke something, single it out
+	if (!AIData.currentGamePiece->isActive())
+		return;
+
 	determineMove();
 }
 
@@ -165,6 +170,8 @@ void AIManager::handelBack()
 			if (node.isValid() && node.getAssignment() != AIData.type) {
 				// Do the move
 				std::cout << "Moving with Back" << std::endl;
+				// Did I forget to unassignNode here?
+				GameOperation::unassignNode(AIData.currentGamePiece->getRow(), AIData.currentGamePiece->getColumn(), gameData);
 				GameOperation::executeMovement(AIData, node);
 				break;
 			}

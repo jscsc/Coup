@@ -18,11 +18,12 @@ bool BackDiagonal::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, 
 	return row && (leftColSide || rightColSide);
 }
 
-BackDiagonal::BackDiagonal(): Movement(Util::BACK_DIAGONAL)
+
+BackDiagonal::BackDiagonal(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Movement(Util::BACK_DIAGONAL, baseTexture, selectedTexture)
 {
 	setCost(3);
 }
-
 
 BackDiagonal::~BackDiagonal()
 {

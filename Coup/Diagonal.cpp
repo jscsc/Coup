@@ -18,11 +18,12 @@ bool Diagonal::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int 
 	return row && (leftColSide || rightColSide);
 }
 
-Diagonal::Diagonal() : Movement(Util::DIAGONAL)
+
+Diagonal::Diagonal(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Movement(Util::DIAGONAL, baseTexture, selectedTexture)
 {
 	setCost(2);
 }
-
 
 Diagonal::~Diagonal()
 {

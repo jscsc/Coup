@@ -28,7 +28,9 @@ void GameManager::gameLogic()
 
 	switch (gameData.currentGameState)
 	{
-
+		case Util::MAIN_MENU:
+			handelGameMainMenu();
+			break;
 		case Util::ABILITY_SETUP:
 			handelGameAbilitySetup();
 			break;
@@ -38,9 +40,22 @@ void GameManager::gameLogic()
 		case Util::GAMEPLAY:
 			handelGameGameplay();
 			break;
+		case Util::GAME_OVER:
+			handelGameGameOver();
+			break;
 		default:
 			break;
 
+	}
+}
+
+void GameManager::handelGameMainMenu()
+{
+	// TODO: need to redo for mutiplayer
+	if (playerOne.ready) {
+		playerOne.ready = false;
+		playerTwo.ready = false;
+		gameData.currentGameState = Util::ABILITY_SETUP;
 	}
 }
 
@@ -77,7 +92,6 @@ void GameManager::determineTurnComplete(PlayerData & playerData)
 {
 	if (gameData.currentTurn == playerData.type && playerData.ready && !playerData.pieceMoving) {
 		GameOperation::switchTrun(gameData);
-		// This is what is breaking it
 		playerOne.ready = false;
 		playerTwo.ready = false;
 	}
@@ -86,11 +100,65 @@ void GameManager::determineTurnComplete(PlayerData & playerData)
 void GameManager::handelGameGameplay()
 {
 	// TODO restart game when no more player pieces on board
+	if (!GameOperation::piecesRemaining(playerOne) || !GameOperation::piecesRemaining(playerTwo)) {
+		handelGameRoundOver();
+		return;
+	}
 
 	if (gameData.currentTurn == Util::PLAYER_ONE)
 		handelGameplayRules(playerOne, playerTwo);
 	else
 		handelGameplayRules(playerTwo, playerOne);
+}
+
+void GameManager::handelGameGameOver()
+{
+	// TODO redo for multiplayer
+	if (gameData.exitReady) {
+		UI.resetAll();
+		playerOne.resetAll();
+		playerTwo.resetAll();
+		gameData.resetAll();
+	}
+	else if (playerOne.ready) {
+		UI.resetAll();
+		playerOne.resetAll();
+		playerTwo.resetAll();
+		gameData.resetAll();
+		gameData.currentGameState = Util::ABILITY_SETUP;
+	}
+}
+
+void GameManager::handelGameRoundOver()
+{
+	// Count player one peices left
+	for (GamePiece *piece : playerOne.pieces) {
+		if (piece->isActive()) {
+			playerOne.score++;
+		}
+	}
+
+	// Count player two peices left
+	for (GamePiece *piece : playerTwo.pieces) {
+		if (piece->isActive()) {
+			playerTwo.score++;
+		}
+	}
+
+	gameData.round++;
+
+	// If round is greater than limit, end the game, else reset round
+	if (gameData.round >= 4) {
+		playerOne.ready = false;
+		playerTwo.ready = false;
+		gameData.exitReady = false;
+		gameData.currentTurn = Util::NEUTRAL;
+		gameData.currentGameState = Util::GAME_OVER;
+	} else {
+		playerOne.resetRound();
+		playerTwo.resetRound();
+		gameData.resetRound();
+	}
 }
 
 void GameManager::handelGameplayRules(PlayerData & playerData, PlayerData &otherPlayerData)
@@ -103,6 +171,7 @@ void GameManager::handelGameplayRules(PlayerData & playerData, PlayerData &other
 				float distance = GameMath::mag(direction);
 				if (distance < 5.0f) {
 					otherPiece->setActive(false);
+					otherPiece->setOnBoard(false);
 				}
 			}
 		}
@@ -116,9 +185,10 @@ void GameManager::handelGameplayRules(PlayerData & playerData, PlayerData &other
 		goalRow = 4;
 
 	for (GamePiece* piece : playerData.pieces) {
-		if (piece->getRow() == goalRow && !playerData.pieceMoving) {
+		if (piece->isActive() && piece->getRow() == goalRow && !playerData.pieceMoving) {
 			piece->setOnBoard(false);
 			piece->setActive(false);
+			GameOperation::unassignNode(piece->getRow(), piece->getColumn(), gameData);
 			playerData.score++;
 		}
 	}
@@ -126,9 +196,3 @@ void GameManager::handelGameplayRules(PlayerData & playerData, PlayerData &other
 	determineTurnComplete(playerData);
 
 }
-
-
-
-
-
-

@@ -12,11 +12,11 @@ bool Stay::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int piec
 	return (nodeRow == pieceRow) && (nodeColumn == pieceColumn);;
 }
 
-Stay::Stay() : Movement(Util::STAY)
+Stay::Stay(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Movement(Util::STAY, baseTexture, selectedTexture)
 {
 	setCost(1);
 }
-
 
 Stay::~Stay()
 {

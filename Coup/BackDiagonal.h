@@ -7,7 +7,7 @@ class BackDiagonal : public Movement
 	bool validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn) override;
 
 public:
-	BackDiagonal();
+	BackDiagonal(sf::Texture &baseTexture, sf::Texture &selectedTexture);
 	~BackDiagonal();
 };
 

@@ -3,6 +3,7 @@
 #include <vector>
 #include "Movement.h"
 class GamePiece;
+struct Textures;
 struct PlayerData
 {
 
@@ -24,6 +25,9 @@ struct PlayerData
 	// Is the player done with their current turn?
 	bool ready;
 
+	// Reference to all the textures in the game
+	Textures &textures;
+
 	// The current game piece selected by this player
 	GamePiece* currentGamePiece;
 
@@ -37,11 +41,13 @@ struct PlayerData
 
 	Movement defaultMovement;
 
-	PlayerData();
-	PlayerData(Util::PlayerType type);
+	PlayerData(Util::PlayerType type, Textures &textures);
 	~PlayerData();
 	void resetCurrentMovement();
 	void setupGamePieces();
+	void resetAll();
+	void resetRound();
+	void resetGamePieces();
 
 };
 

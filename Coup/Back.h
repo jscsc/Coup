@@ -7,7 +7,7 @@ class Back : public Movement
 	bool validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn) override;
 
 public:
-	Back();
+	Back(sf::Texture &baseTexture, sf::Texture &selectedTexture);
 	~Back();
 };
 

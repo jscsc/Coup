@@ -30,6 +30,10 @@ public:
 	void playerLogic();
 	void selectState();
 
+	void handelPlayerMainMenu();
+	bool handelMainMenuStartButton();
+	bool handelMainMenuQuitButton();
+
 	void handelPlayerAbilitySetup();
 	bool handelAbilitySetupReadyButton();
 	bool handelAbilitySetupResetButton();
@@ -40,9 +44,12 @@ public:
 	bool handelPositionSetupBoardNodeSelection();
 
 	void handelPlayerGameplay();
-
 	bool handelAbilitySelection();
 	bool handelBoardNodeSelection();
 	bool handelGamePieceSelection();
+
+	void handelPlayerGameOver();
+	bool handelGameOverReplayButton();
+	bool handelGameOverMainMenuButton();
 };
 

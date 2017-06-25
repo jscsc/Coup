@@ -23,15 +23,18 @@ bool Movement::validate(BoardNode &currentNode, GamePiece &currentPiece)
 
 void Movement::render(sf::RenderWindow &window)
 {
-	if(selected)
-		rect.setFillColor(sf::Color::Green);
+	if (selected)
+		movementSprite.setTexture(selectedTexture);
 	else
-		rect.setFillColor(sf::Color::Red);
-	window.draw(rect);
+		movementSprite.setTexture(baseTexture);
+	window.draw(movementSprite);
+	//window.draw(rect);
 }
 
 void Movement::setPosition(float x, float y)
 {
+
+	movementSprite.setPosition(sf::Vector2f(x, y));
 	rect.setPosition(sf::Vector2f(x, y));
 }
 
@@ -40,19 +43,36 @@ Util::MovementType Movement::getMovementType()
 	return type;
 }
 
-Movement::Movement() : Ability(), type(Util::FORWARD), rect(sf::Vector2f(50, 50))
+Movement::Movement(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Ability(), type(Util::FORWARD), baseTexture(baseTexture), selectedTexture(selectedTexture), rect(sf::Vector2f(64, 64))
 {
 	setCost(0);
+	movementSprite.setTexture(baseTexture);
 	rect.setFillColor(sf::Color::Red);
-	rect.setPosition(sf::Vector2f(300, 700));
+
 }
 
-Movement::Movement(Util::MovementType type) : type(type), rect(sf::Vector2f(50, 50))
+Movement::Movement(Util::MovementType type, sf::Texture & baseTexture, sf::Texture & selectedTexture)
+: Ability(), type(type), baseTexture(baseTexture), selectedTexture(selectedTexture), rect(sf::Vector2f(64, 64))
 {
 	setCost(0);
+	movementSprite.setTexture(baseTexture);
 	rect.setFillColor(sf::Color::Red);
-	rect.setPosition(sf::Vector2f(300, 700));
 }
+
+//Movement::Movement() : Ability(), type(Util::FORWARD), rect(sf::Vector2f(50, 50))
+//{
+//	setCost(0);
+//	rect.setFillColor(sf::Color::Red);
+//	rect.setPosition(sf::Vector2f(300, 700));
+//}
+
+//Movement::Movement(Util::MovementType type) : type(type), rect(sf::Vector2f(50, 50))
+//{
+//	setCost(0);
+//	rect.setFillColor(sf::Color::Red);
+//	rect.setPosition(sf::Vector2f(300, 700));
+//}
 
 
 Movement::~Movement()

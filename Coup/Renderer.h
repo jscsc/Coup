@@ -23,8 +23,10 @@ public:
 	~Renderer();
 
 	void render();
+	void renderMainMenu();
 	void renderAbilitySetup();
 	void renderPositionSetup();
 	void renderGameplay();
+	void renderGameOver();
 };
 

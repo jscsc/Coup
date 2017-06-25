@@ -10,6 +10,7 @@
 #include "GameData.h"
 #include "GamePiece.h"
 #include "GameMath.h"
+#include "Textures.h"
 #include <iostream>
 #include <random>
 
@@ -47,27 +48,27 @@ void GameOperation::addMovement(PlayerData &playerData, Util::MovementType type)
 	switch (type)
 	{
 		case Util::BACK:
-			playerData.movements.push_back(new Back());
+			playerData.movements.push_back(new Back(playerData.textures.backTexture, playerData.textures.backSelectedTexture));
 			std::cout << "Adding Back" << std::endl;
 			break;
 		case Util::STAY:
-			playerData.movements.push_back(new Stay());
+			playerData.movements.push_back(new Stay(playerData.textures.stayTexture, playerData.textures.staySelectedTexture));
 			std::cout << "Adding Stay" << std::endl;
 			break;
 		case Util::LEFT_OR_RIGHT:
-			playerData.movements.push_back(new LeftOrRight());
+			playerData.movements.push_back(new LeftOrRight(playerData.textures.leftOrRightTexture, playerData.textures.leftOrRightSelectedTexture));
 			std::cout << "Adding Left of Right" << std::endl;
 			break;
 		case Util::DIAGONAL:
-			playerData.movements.push_back(new Diagonal());
+			playerData.movements.push_back(new Diagonal(playerData.textures.diagonalTexture, playerData.textures.diagonalSelectedTexture));
 			std::cout << "Adding Diagonal" << std::endl;
 			break;
 		case Util::SUPER:
-			playerData.movements.push_back(new Super());
+			playerData.movements.push_back(new Super(playerData.textures.superTexture, playerData.textures.superSelectedTexture));
 			std::cout << "Adding Super" << std::endl;
 			break;
 		case Util::FORWARD:
-			playerData.movements.push_back(new Movement());
+			playerData.movements.push_back(new Movement(playerData.textures.backTexture, playerData.textures.backSelectedTexture));
 			std::cout << "Adding Forward" << std::endl;
 			break;
 		default:
@@ -91,7 +92,10 @@ void GameOperation::validateBoard(PlayerData & playerData, GameData & gameData)
 	}
 
 	for (BoardNode &node : gameData.nodes)
-		node.setValid(playerData.currentMovement->validate(node, *playerData.currentGamePiece));
+		if (node.getAssignment() != playerData.type || playerData.currentMovement->getMovementType() == Util::STAY)
+			node.setValid(playerData.currentMovement->validate(node, *playerData.currentGamePiece));
+		else
+			node.setValid(false);
 }
 
 void GameOperation::executeMovement(PlayerData & playerData, BoardNode & node)
@@ -160,6 +164,23 @@ void GameOperation::handelPlayerMovements(PlayerData & playerData)
 			atleastOneMoveing = true;
 
 	playerData.pieceMoving = atleastOneMoveing;
+}
+
+void GameOperation::setText(sf::Text & text, sf::Font & gameFont, int charSize, float x, float y, const std::string & message)
+{
+	text.setFont(gameFont);
+	text.setString(message);
+	text.setCharacterSize(charSize);
+	text.setFillColor(sf::Color::Black);
+	text.setPosition(sf::Vector2f(x, y));
+}
+
+bool GameOperation::piecesRemaining(PlayerData & playerData)
+{
+	for (GamePiece *piece : playerData.pieces)
+		if (piece->isActive())
+			return true;
+	return false;
 }
 
 GameOperation::GameOperation()

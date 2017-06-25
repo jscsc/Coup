@@ -16,42 +16,60 @@
     <Filter Include="Source Files\Movements">
       <UniqueIdentifier>{c950aabd-dca7-4f1f-8312-ce7910379d6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Abilities">
+      <UniqueIdentifier>{469fc842-0d55-42a7-bf28-226e3ddec4ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{beec1e40-f2ed-4650-93de-fc7611de9edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI">
+      <UniqueIdentifier>{5bfebfaf-abb3-4f06-9d57-0e48a0268547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{acf0c755-1b59-4cbe-a2cc-b037698c0d86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{79dccf41-2854-423c-8ab6-b2b9785d3d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game_Object_Model">
+      <UniqueIdentifier>{c9a1d104-4323-43b0-87f5-3fdd907984d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game_State">
+      <UniqueIdentifier>{d17aa7bb-cd02-4a66-8af3-ef97e15de6ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering">
+      <UniqueIdentifier>{ba992b5d-690f-495f-b875-a14b2f41f914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Movements">
+      <UniqueIdentifier>{e3db6620-1ef0-45f4-9cb6-3cf73a057304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Abilities">
+      <UniqueIdentifier>{68795e45-9720-4b85-ad30-6e978370404d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{082f8e07-a9fa-403a-b4b0-27928fe8933c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI">
+      <UniqueIdentifier>{e7ea36de-5c34-48a1-b44f-f821b5c7c7e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game_Object_Model">
+      <UniqueIdentifier>{4084c568-4746-4e65-be5b-56959402c5b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game_State">
+      <UniqueIdentifier>{29b182af-32e3-4eef-be46-e15399683cad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rendering">
+      <UniqueIdentifier>{a17cc951-f398-4fc2-aeac-f374fe0a7911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{f445d034-bfb4-4597-ad9a-c1cf20a16b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{74eed8e7-1cb1-4b8f-aa7c-0cf9b2f81f13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Kinematic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SteeringOutput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SteeringBehavior.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Arrive.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GamePiece.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Ability.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Movement.cpp">
@@ -62,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="LeftOrRight.cpp">
       <Filter>Source Files\Movements</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableObject.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Diagonal.cpp">
       <Filter>Source Files\Movements</Filter>
@@ -84,138 +99,180 @@
     <ClCompile Include="Super.cpp">
       <Filter>Source Files\Movements</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOperation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ToggleButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Stay.cpp">
       <Filter>Source Files\Movements</Filter>
     </ClCompile>
-    <ClCompile Include="AIManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Ability.cpp">
+      <Filter>Source Files\Abilities</Filter>
     </ClCompile>
-    <ClCompile Include="UIData.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="AIManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrive.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehavior.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringOutput.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOperation.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMath.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="UIData.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Game_Object_Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Kinematic.cpp">
+      <Filter>Source Files\Game_Object_Model</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePiece.cpp">
+      <Filter>Source Files\Game_Object_Model</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardObject.cpp">
+      <Filter>Source Files\Game_Object_Model</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardNode.cpp">
+      <Filter>Source Files\Game_Object_Model</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuButton.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ToggleButton.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameData.cpp">
+      <Filter>Source Files\Game_State</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerData.cpp">
+      <Filter>Source Files\Game_State</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject.cpp">
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Kinematic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SteeringOutput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMath.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SteeringBehavior.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Arrive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GamePiece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ability.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Movement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Back.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LeftOrRight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Diagonal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Super.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BackDiagonal.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Ability.h">
+      <Filter>Header Files\Abilities</Filter>
     </ClInclude>
-    <ClInclude Include="DiagonalSuper.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Arrive.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Back.h">
+      <Filter>Header Files\Movements</Filter>
+    </ClInclude>
+    <ClInclude Include="BackDiagonal.h">
+      <Filter>Header Files\Movements</Filter>
     </ClInclude>
     <ClInclude Include="BackDiagonalSuper.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Movements</Filter>
     </ClInclude>
-    <ClInclude Include="LeftOrRightSuper.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="BoardNode.h">
+      <Filter>Header Files\Game_Object_Model</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerData.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="BoardObject.h">
+      <Filter>Header Files\Game_Object_Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Diagonal.h">
+      <Filter>Header Files\Movements</Filter>
+    </ClInclude>
+    <ClInclude Include="DiagonalSuper.h">
+      <Filter>Header Files\Movements</Filter>
     </ClInclude>
     <ClInclude Include="GameData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOperation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ToggleButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AIManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UIData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game_State</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMath.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Game_Object_Model</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOperation.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePiece.h">
+      <Filter>Header Files\Game_Object_Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Kinematic.h">
+      <Filter>Header Files\Game_Object_Model</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftOrRight.h">
+      <Filter>Header Files\Movements</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftOrRightSuper.h">
+      <Filter>Header Files\Movements</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButton.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Header Files\Movements</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerData.h">
+      <Filter>Header Files\Game_State</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AIManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehavior.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringOutput.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject.h">
+      <Filter>Header Files\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="UIData.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Stay.h">
+      <Filter>Header Files\Movements</Filter>
+    </ClInclude>
+    <ClInclude Include="Super.h">
+      <Filter>Header Files\Movements</Filter>
+    </ClInclude>
+    <ClInclude Include="ToggleButton.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

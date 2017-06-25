@@ -16,11 +16,12 @@ bool LeftOrRightSuper::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceR
 	return left || right;
 }
 
-LeftOrRightSuper::LeftOrRightSuper() : Movement(Util::LEFT_OR_RIGHT_SUPER)
+
+LeftOrRightSuper::LeftOrRightSuper(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Movement(Util::LEFT_OR_RIGHT_SUPER, baseTexture, selectedTexture)
 {
 	setCost(4);
 }
-
 
 LeftOrRightSuper::~LeftOrRightSuper()
 {

@@ -10,11 +10,11 @@ bool Back::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int piec
 	return (nodeRow == pieceRow - 1) && (nodeColumn == pieceColumn);;
 }
 
-Back::Back() : Movement(Util::BACK)
+Back::Back(sf::Texture & baseTexture, sf::Texture & selectedTexture)
+	: Movement(Util::BACK, baseTexture, selectedTexture)
 {
 	setCost(1);
 }
-
 
 Back::~Back()
 {

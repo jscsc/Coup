@@ -7,7 +7,7 @@ class Stay : public Movement
 	bool validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn) override;
 
 public:
-	Stay();
+	Stay(sf::Texture &baseTexture, sf::Texture &selectedTexture);
 	~Stay();
 };
 

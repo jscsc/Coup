@@ -23,10 +23,13 @@ public:
 
 	void gameLogic();
 
+	void handelGameMainMenu();
 	void handelGameAbilitySetup();
 	void handelGamePositionSetup();
 	void determineTurnComplete(PlayerData &playerData);
 	void handelGameGameplay();
+	void handelGameGameOver();
+	void handelGameRoundOver();
 	void handelGameplayRules(PlayerData &playerData, PlayerData &otherPlayerData);
 };
 

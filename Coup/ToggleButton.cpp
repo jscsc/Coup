@@ -2,7 +2,7 @@
 
 
 
-ToggleButton::ToggleButton(float x, float y) : MenuButton(x, y), toggled(false)
+ToggleButton::ToggleButton(float x, float y, sf::Font &gameFont, const std::string &message) : MenuButton(x, y, gameFont, message), toggled(false)
 {
 }
 
@@ -27,6 +27,6 @@ void ToggleButton::render(sf::RenderWindow & window)
 		rect.setFillColor(sf::Color::Green);
 	else
 		rect.setFillColor(sf::Color::Red);
-
-	window.draw(rect);
+	window.draw(text);
+	//window.draw(rect);
 }

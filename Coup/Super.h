@@ -7,7 +7,7 @@ class Super : public Movement
 	bool validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn) override;
 
 public:
-	Super();
+	Super(sf::Texture &baseTexture, sf::Texture &selectedTexture);
 	~Super();
 };
 

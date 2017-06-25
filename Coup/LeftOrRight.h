@@ -7,7 +7,7 @@ class LeftOrRight : public Movement
 	bool validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn) override;
 
 public:
-	LeftOrRight();
+	LeftOrRight(sf::Texture &baseTexture, sf::Texture &selectedTexture);
 	~LeftOrRight();
 };
 

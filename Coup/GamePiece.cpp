@@ -12,7 +12,7 @@ GamePiece::GamePiece(Util::PlayerType owner, float x, float y, int row, int colu
 	body.setOrigin(body.getRadius(), body.getRadius());
 	body.setPosition(kinematic.position);
 	setMovementTargetPosition(x, y);
-	body.setFillColor(sf::Color::White);
+	setColor();
 }
 
 GamePiece::~GamePiece()
@@ -37,6 +37,13 @@ void GamePiece::setMovementTargetPosition(float x, float y)
 	arrive.target.position.y = y;
 }
 
+void GamePiece::setPosition(float x, float y)
+{
+	kinematic.position.x = x;
+	kinematic.position.y = y;
+	body.setPosition(kinematic.position);
+}
+
 Util::PlayerType GamePiece::getType()
 {
 	return owner;
@@ -58,7 +65,7 @@ void GamePiece::setSelected(bool selected)
 	if (selected)
 		body.setFillColor(sf::Color::Yellow);
 	else
-		body.setFillColor(sf::Color::White);
+		setColor();
 	this->selected = selected;
 }
 
@@ -80,5 +87,13 @@ bool GamePiece::isOnBoard()
 bool GamePiece::setOnBoard(bool onBoard)
 {
 	return this->onBoard = onBoard;
+}
+
+void GamePiece::setColor()
+{
+	if (owner == Util::PLAYER_ONE)
+		body.setFillColor(sf::Color::Red);
+	else
+		body.setFillColor(sf::Color::Blue);
 }
 

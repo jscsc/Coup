@@ -1,6 +1,8 @@
 #pragma once
 #include "Util.h"
 #include <vector>
+#include <SFML/Graphics.hpp>
+#include <string>
 class Movement;
 class BoardNode;
 struct PlayerData;
@@ -21,6 +23,8 @@ public:
 	static void switchTrun(GameData &gameData);
 	static void pickRandomTurn(GameData &gameData);
 	static void handelPlayerMovements(PlayerData &playerData);
+	static void setText(sf::Text &text, sf::Font &gameFont, int charSize, float x, float y, const std::string &message);
+	static bool piecesRemaining(PlayerData &playerData);
 
 
 private:

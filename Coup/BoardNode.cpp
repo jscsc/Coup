@@ -29,7 +29,7 @@ void BoardNode::setValid(bool valid)
 	if (this->valid == true) {
 		body.setFillColor(sf::Color::Green);
 	} else {
-		body.setFillColor(sf::Color::Blue);
+		body.setFillColor(sf::Color::Black);
 	}
 }
 

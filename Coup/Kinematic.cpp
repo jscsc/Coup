@@ -49,3 +49,13 @@ void Kinematic::update(const SteeringOutput &steering)
 		velocity *= MAX_SPEED;
 	}
 }
+
+void Kinematic::reset()
+{
+	position.x = 0;
+	position.y = 0;
+	orientation = 0;
+	velocity.x = 0;
+	velocity.y = 0;
+	rotation = 0;
+}
