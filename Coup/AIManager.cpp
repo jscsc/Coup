@@ -169,7 +169,7 @@ void AIManager::handelBack()
 		for (BoardNode &node : gameData.nodes) {
 			if (node.isValid() && node.getAssignment() != AIData.type) {
 				// Do the move
-				std::cout << "Moving with Back" << std::endl;
+				//std::cout << "Moving with Back" << std::endl;
 				// Did I forget to unassignNode here?
 				GameOperation::unassignNode(AIData.currentGamePiece->getRow(), AIData.currentGamePiece->getColumn(), gameData);
 				GameOperation::executeMovement(AIData, node);
@@ -186,7 +186,7 @@ void AIManager::handelStay()
 		for (BoardNode &node : gameData.nodes) {
 			if (node.isValid()) {
 				// Do the move
-				std::cout << "Moving with Stay" << std::endl;
+				//std::cout << "Moving with Stay" << std::endl;
 				GameOperation::unassignNode(AIData.currentGamePiece->getRow(), AIData.currentGamePiece->getColumn(), gameData);
 				GameOperation::executeMovement(AIData, node);
 				break;
@@ -200,7 +200,7 @@ void AIManager::handelLeftOrRight()
 	GameOperation::validateBoard(AIData, gameData);
 	for (BoardNode &node : gameData.nodes) {
 		if (node.isValid() && node.getAssignment() == Util::PLAYER_ONE) {
-			std::cout << "Moving with LeftOrRIght" << std::endl;
+			//std::cout << "Moving with LeftOrRIght" << std::endl;
 			GameOperation::unassignNode(AIData.currentGamePiece->getRow(), AIData.currentGamePiece->getColumn(), gameData);
 			GameOperation::executeMovement(AIData, node);
 			break;
@@ -213,7 +213,7 @@ void AIManager::handelDiagonal()
 	GameOperation::validateBoard(AIData, gameData);
 	for (BoardNode &node : gameData.nodes) {
 		if (node.isValid() && node.getAssignment() == Util::PLAYER_ONE) {
-			std::cout << "Moving with Diagonal" << std::endl;
+			//std::cout << "Moving with Diagonal" << std::endl;
 			GameOperation::unassignNode(AIData.currentGamePiece->getRow(), AIData.currentGamePiece->getColumn(), gameData);
 			GameOperation::executeMovement(AIData, node);
 			break;
@@ -226,7 +226,7 @@ void AIManager::handelSuper()
 	GameOperation::validateBoard(AIData, gameData);
 	for (BoardNode &node : gameData.nodes) {
 		if (node.isValid() && node.getAssignment() == Util::PLAYER_ONE) {
-			std::cout << "Moving with Super" << std::endl;
+			//std::cout << "Moving with Super" << std::endl;
 			GameOperation::unassignNode(AIData.currentGamePiece->getRow(), AIData.currentGamePiece->getColumn(), gameData);
 			GameOperation::executeMovement(AIData, node);
 			break;
@@ -239,7 +239,7 @@ void AIManager::handelDefault()
 	GameOperation::validateBoard(AIData, gameData);
 	for (BoardNode &node : gameData.nodes) {
 		if (node.isValid()) {
-			std::cout << "Moving with Default" << std::endl;
+			//std::cout << "Moving with Default" << std::endl;
 			GameOperation::unassignNode(AIData.currentGamePiece->getRow(), AIData.currentGamePiece->getColumn(), gameData);
 			GameOperation::executeMovement(AIData, node);
 			AIData.currentMovement->setActive(true);

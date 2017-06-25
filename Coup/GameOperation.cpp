@@ -49,27 +49,27 @@ void GameOperation::addMovement(PlayerData &playerData, Util::MovementType type)
 	{
 		case Util::BACK:
 			playerData.movements.push_back(new Back(playerData.textures.backTexture, playerData.textures.backSelectedTexture));
-			std::cout << "Adding Back" << std::endl;
+			//std::cout << "Adding Back" << std::endl;
 			break;
 		case Util::STAY:
 			playerData.movements.push_back(new Stay(playerData.textures.stayTexture, playerData.textures.staySelectedTexture));
-			std::cout << "Adding Stay" << std::endl;
+			//std::cout << "Adding Stay" << std::endl;
 			break;
 		case Util::LEFT_OR_RIGHT:
 			playerData.movements.push_back(new LeftOrRight(playerData.textures.leftOrRightTexture, playerData.textures.leftOrRightSelectedTexture));
-			std::cout << "Adding Left of Right" << std::endl;
+			//std::cout << "Adding Left of Right" << std::endl;
 			break;
 		case Util::DIAGONAL:
 			playerData.movements.push_back(new Diagonal(playerData.textures.diagonalTexture, playerData.textures.diagonalSelectedTexture));
-			std::cout << "Adding Diagonal" << std::endl;
+			//std::cout << "Adding Diagonal" << std::endl;
 			break;
 		case Util::SUPER:
 			playerData.movements.push_back(new Super(playerData.textures.superTexture, playerData.textures.superSelectedTexture));
-			std::cout << "Adding Super" << std::endl;
+			//std::cout << "Adding Super" << std::endl;
 			break;
 		case Util::FORWARD:
 			playerData.movements.push_back(new Movement(playerData.textures.backTexture, playerData.textures.backSelectedTexture));
-			std::cout << "Adding Forward" << std::endl;
+			//std::cout << "Adding Forward" << std::endl;
 			break;
 		default:
 			break;

@@ -165,9 +165,11 @@ bool PlayerManager::handelAbilitySetupAbilitySelection()
 	for (Movement * movement : UI.movementSelection) {
 
 		if (movement->movementSprite.getGlobalBounds().contains(mousePosition)) {
-			GameOperation::addMovement(playerData, movement->getMovementType());
-			playerData.points += movement->getCost();
-			return true;
+			if (playerData.points + movement->getCost() <= 4) {
+				GameOperation::addMovement(playerData, movement->getMovementType());
+				playerData.points += movement->getCost();
+				return true;
+			}
 		}
 
 	}
