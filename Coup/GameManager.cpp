@@ -57,6 +57,10 @@ void GameManager::handelGameMainMenu()
 		playerTwo.ready = false;
 		gameData.currentGameState = Util::ABILITY_SETUP;
 	}
+
+	if (gameData.exitReady) {
+		window.close();
+	}
 }
 
 void GameManager::handelGameAbilitySetup()
