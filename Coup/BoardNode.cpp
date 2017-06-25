@@ -10,7 +10,7 @@ BoardNode::BoardNode() : BoardObject()
 BoardNode::BoardNode(float x, float y, int row, int column, float size) : BoardObject(row, column),
 valid(false), assignment(Util::NEUTRAL), body(size)
 {
-	body.setFillColor(sf::Color::Blue);
+	body.setFillColor(sf::Color::Black);
 	body.setOrigin(body.getRadius(), body.getRadius());
 	kinematic.position.x = x;
 	kinematic.position.y = y;
