@@ -25,15 +25,15 @@ void PlayerData::setupGamePieces()
 {
 	if (type == Util::PLAYER_ONE) {
 
-		pieces.push_back(new GamePiece(type, 450, 700, -1, -1, 10));
-		pieces.push_back(new GamePiece(type, 500, 700, -1, -1, 10));
-		pieces.push_back(new GamePiece(type, 550, 700, -1, -1, 10));
+		pieces.push_back(new GamePiece(type, 459, 668, -1, -1, 10));
+		pieces.push_back(new GamePiece(type, 512, 668, -1, -1, 10));
+		pieces.push_back(new GamePiece(type, 565, 668, -1, -1, 10));
 
 	} else {
 
-		pieces.push_back(new GamePiece(type, 450, 100, -1, -1, 10));
-		pieces.push_back(new GamePiece(type, 500, 100, -1, -1, 10));
-		pieces.push_back(new GamePiece(type, 550, 100, -1, -1, 10));
+		pieces.push_back(new GamePiece(type, 459, 100, -1, -1, 10));
+		pieces.push_back(new GamePiece(type, 512, 100, -1, -1, 10));
+		pieces.push_back(new GamePiece(type, 565, 100, -1, -1, 10));
 
 	}
 }

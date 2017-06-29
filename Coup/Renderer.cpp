@@ -51,12 +51,17 @@ void Renderer::renderMainMenu()
 	// Render Play and Quit Options
 	window.draw(UI.playButton);
 	window.draw(UI.quitButton);
+
+	window.draw(UI.howToPlay);
+	window.draw(UI.instruction1);
+	window.draw(UI.instruction2);
+	window.draw(UI.instruction3);
 }
 
 void Renderer::renderAbilitySetup()
 {
 	// Render movments to select from
-	float x = 300.0f;
+	float x = 285.0f;
 	float y = 400.0f;
 	for (Movement *movement : UI.movementSelection) {
 		if (movement->isActive()) {
@@ -67,14 +72,15 @@ void Renderer::renderAbilitySetup()
 	}
 
 	// render ready button
-	UI.readyButton.render(window);
+	if (playerData.points >= 4)
+		UI.readyButton.render(window);
 
 	// render reset button
 	UI.resetSelectionButton.render(window);
 
 	// render current movements
-	x = 300.0f;
-	y = 700.0f;
+	x = 285.0f;
+	y = 675.0f;
 	for (Movement *movement : playerData.movements) {
 		if (movement->isActive()) {
 			movement->setPosition(x, y);
@@ -92,6 +98,17 @@ void Renderer::renderAbilitySetup()
 	window.draw(UI.opponentScore);
 	window.draw(UI.currentRound);
 	window.draw(UI.pointsUsed);
+
+	window.draw(UI.stayCost);
+	window.draw(UI.leftOrRightCost);
+	window.draw(UI.backCost);
+	window.draw(UI.diagonalCost);
+	window.draw(UI.superCost);
+	
+	window.draw(UI.abilityChoice);
+	window.draw(UI.assignedColor);
+
+	window.draw(UI.exitButton);
 }
 
 void Renderer::renderPositionSetup()
@@ -118,6 +135,9 @@ void Renderer::renderPositionSetup()
 	window.draw(UI.playerScore);
 	window.draw(UI.opponentScore);
 	window.draw(UI.currentRound);
+
+	window.draw(UI.pickPositions);
+	window.draw(UI.exitButton);
 }
 
 void Renderer::renderGameplay()
@@ -133,8 +153,8 @@ void Renderer::renderGameplay()
 		if (piece->isActive())
 			piece->render(window);
 
-	float x = 300.0f;
-	float y = 700.0f;
+	float x = 285.0f;
+	float y = 675.0f;
 	for (Movement *movement : playerData.movements) {
 		if (movement->isActive()) {
 			movement->setPosition(x, y);
@@ -154,6 +174,7 @@ void Renderer::renderGameplay()
 	window.draw(UI.playerScore);
 	window.draw(UI.opponentScore);
 	window.draw(UI.currentRound);
+	window.draw(UI.exitButton);
 }
 
 void Renderer::renderGameOver()
@@ -161,14 +182,16 @@ void Renderer::renderGameOver()
 	// Render Winner
 	if (playerData.score > otherPlayerData.score) {
 		UI.winner.setString("Winner");
-		UI.winner.setPosition(sf::Vector2f(330.0f, 100.0f));
-	} else if (playerData.score > otherPlayerData.score) {
+		//UI.winner.setPosition(sf::Vector2f(320.0f, 100.0f));
+	} else if (playerData.score < otherPlayerData.score) {
 		UI.winner.setString("Loser");
-		UI.winner.setPosition(sf::Vector2f(375.0f, 100.0f));
+		//UI.winner.setPosition(sf::Vector2f(370.0f, 100.0f));
 	} else {
 		UI.winner.setString("Tie");
-		UI.winner.setPosition(sf::Vector2f(450.0f, 100.0f));
+		//UI.winner.setPosition(sf::Vector2f(430.0f, 100.0f));
 	}
+
+	GameOperation::centerTextX(UI.winner, .5f);
 
 
 	window.draw(UI.winner);
@@ -176,4 +199,6 @@ void Renderer::renderGameOver()
 	// Render replay and Main Menu Buttons
 	window.draw(UI.replayButton);
 	window.draw(UI.returnToMainMenuButton);
+	window.draw(UI.playerScore);
+	window.draw(UI.opponentScore);
 }

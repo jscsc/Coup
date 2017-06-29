@@ -51,5 +51,7 @@ public:
 	void handelPlayerGameOver();
 	bool handelGameOverReplayButton();
 	bool handelGameOverMainMenuButton();
+
+	bool handelQuitMatch();
 };
 

@@ -102,10 +102,13 @@ bool PlayerManager::handelMainMenuQuitButton()
 
 void PlayerManager::handelPlayerAbilitySetup()
 {
-
+	
 
 	// Be sure the player actually clicked something;
 	if (!gameData.mouseClicked || gameData.currentTurn != Util::NEUTRAL)
+		return;
+
+	if (handelQuitMatch())
 		return;
 
 	//std::cout << "Got here" << std::endl;
@@ -179,8 +182,12 @@ bool PlayerManager::handelAbilitySetupAbilitySelection()
 
 void PlayerManager::handelPlayerPositionSetup()
 {
+
 	// If not our turn, don't be here
 	if (gameData.currentTurn != playerData.type)
+		return;
+
+	if (handelQuitMatch())
 		return;
 
 	//std::cout << "Player pieces assigned: " << playerData.assignedPieces << std::endl;
@@ -248,6 +255,9 @@ bool PlayerManager::handelPositionSetupBoardNodeSelection()
 
 void PlayerManager::handelPlayerGameplay()
 {
+	if (handelQuitMatch())
+		return;
+
 	// If not our turn, don't be here
 	if (gameData.currentTurn != playerData.type)
 		return;
@@ -387,6 +397,22 @@ bool PlayerManager::handelGameOverMainMenuButton()
 	sf::Mouse::getPosition(window);
 
 	if (UI.returnToMainMenuButton.getGlobalBounds().contains(mousePosition)) {
+		gameData.exitReady = true;
+		return true;
+	}
+
+	return false;
+}
+
+bool PlayerManager::handelQuitMatch()
+{
+	if (!gameData.mouseClicked)
+		return false;
+
+	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
+	sf::Mouse::getPosition(window);
+
+	if (UI.exitButton.getGlobalBounds().contains(mousePosition)) {
 		gameData.exitReady = true;
 		return true;
 	}

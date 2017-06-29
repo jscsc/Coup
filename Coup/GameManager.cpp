@@ -71,11 +71,27 @@ void GameManager::handelGameAbilitySetup()
 		GameOperation::pickRandomTurn(gameData);
 		playerOne.ready = false;
 		playerTwo.ready = false;
+		return;
+	}
+
+	if (gameData.exitReady) {
+		UI.resetAll();
+		playerOne.resetAll();
+		playerTwo.resetAll();
+		gameData.resetAll();
 	}
 }
 
 void GameManager::handelGamePositionSetup()
 {
+
+	if (gameData.exitReady) {
+		UI.resetAll();
+		playerOne.resetAll();
+		playerTwo.resetAll();
+		gameData.resetAll();
+		return;
+	}
 
 	if (GameOperation::piecesAssigned(playerOne) && GameOperation::piecesAssigned(playerTwo)) {
 		GameOperation::switchTrun(gameData);
@@ -103,6 +119,14 @@ void GameManager::determineTurnComplete(PlayerData & playerData)
 
 void GameManager::handelGameGameplay()
 {
+	if (gameData.exitReady) {
+		UI.resetAll();
+		playerOne.resetAll();
+		playerTwo.resetAll();
+		gameData.resetAll();
+		return;
+	}
+
 	// TODO restart game when no more player pieces on board
 	if (!GameOperation::piecesRemaining(playerOne) || !GameOperation::piecesRemaining(playerTwo)) {
 		handelGameRoundOver();
@@ -123,8 +147,7 @@ void GameManager::handelGameGameOver()
 		playerOne.resetAll();
 		playerTwo.resetAll();
 		gameData.resetAll();
-	}
-	else if (playerOne.ready) {
+	} else if (playerOne.ready) {
 		UI.resetAll();
 		playerOne.resetAll();
 		playerTwo.resetAll();

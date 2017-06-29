@@ -12,35 +12,63 @@
 
 
 UIData::UIData(Textures &textures, sf::Font &gameFont)
-	: readyButton(500, 200, gameFont, "Ready"), resetSelectionButton(500, 300, gameFont, "Reset"), triangle(30, 3)
+	: readyButton(485, 200, gameFont, "Ready"), resetSelectionButton(485, 300, gameFont, "Reset"), triangle(30, 3)
 {
-	GameOperation::setText(title, gameFont, 128, 375.0f, 100.0f, "Coup");
-	
-	GameOperation::setText(opponentScore, gameFont, 24, 750.0f, 50.0f, "OPt Score");
+	// Instructions
+	std::string instr = "                                     How To Play\n\n";
+	instr = instr + "move game pieces to opposite end of the board to score\n\n";
+	instr = instr + " use abilities to avoid and attack opponent game pieces\n\n";
+	instr = instr + "     player with the most score after three rounds wins";
 
-	GameOperation::setText(playerScore, gameFont, 24, 750.0f, 100.0f, "Player Score");
 
-	GameOperation::setText(currentRound, gameFont, 24, 750.0f, 150.0f, "Round");
+	GameOperation::setText(title, gameFont, 128, 370.0f, 100.0f, "Coup");
+	GameOperation::setText(playButton, gameFont, 24, 490.0f, 325.0f, "Play");
+	GameOperation::setText(quitButton, gameFont, 24, 490.0f, 400.0f, "Exit");
+	GameOperation::setText(howToPlay, gameFont, 24, 225.0f, 500.0f, "How To Play");
+	GameOperation::setText(instruction1, gameFont, 24, 225.0f, 550.0f, "move game pieces to the opposite end of the board to score");
+	GameOperation::setText(instruction2, gameFont, 24, 225.0f, 600.0f, "use abilities to avoid and attack opponent game pieces");
+	GameOperation::setText(instruction3, gameFont, 24, 225.0f, 650.0f, "player with the most score after three rounds wins");
 
-	GameOperation::setText(pointsUsed, gameFont, 24, 750.0f, 200.0f, "Points");
+	GameOperation::setText(opponentScore, gameFont, 24, 800.0f, 50.0f, "Opt Score");
+	GameOperation::setText(playerScore, gameFont, 24, 800.0f, 100.0f, "Player Score");
+	GameOperation::setText(currentRound, gameFont, 24, 800.0f, 150.0f, "Round");
+	GameOperation::setText(pointsUsed, gameFont, 24, 800.0f, 200.0f, "Points");
 
-	GameOperation::setText(playButton, gameFont, 24, 500.0f, 350.0f, "Play");
+	GameOperation::setText(stayCost, gameFont, 24, 311.0f, 475.0f, "1");
+	GameOperation::setText(leftOrRightCost, gameFont, 24, 411.0f, 475.0f, "1");
+	GameOperation::setText(backCost, gameFont, 24, 511.0f, 475.0f, "2");
+	GameOperation::setText(diagonalCost, gameFont, 24, 611.0f, 475.0f, "2");
+	GameOperation::setText(superCost, gameFont, 24, 711.0f, 475.0f, "3");
 
-	GameOperation::setText(quitButton, gameFont, 24, 500.0f, 400.0f, "Quit");
+	GameOperation::setText(abilityChoice, gameFont, 24, 50.0f, 690.0f, "Chosen:");
+	GameOperation::setText(assignedColor, gameFont, 24, 50.0f, 50.0f, "Assigned Color : Red");
 
-	GameOperation::setText(winner, gameFont, 128, 375.0f, 100.0f, "Winner");
+	GameOperation::setText(pickPositions, gameFont, 24, 50.0f, 690.0f, "Choose Positions");
 
-	GameOperation::setText(replayButton, gameFont, 24, 500.0f, 350.0f, "Replay");
+	GameOperation::setText(winner, gameFont, 128, 430.0f, 100.0f, "Tie");
+	GameOperation::setText(replayButton, gameFont, 24, 480.0f, 350.0f, "Replay");
+	GameOperation::setText(returnToMainMenuButton, gameFont, 24, 460.0f, 400.0f, "Main Menu");
 
-	GameOperation::setText(returnToMainMenuButton, gameFont, 24, 480.0f, 400.0f, "Main Menu");
+	GameOperation::setText(exitButton, gameFont, 24, 900.0f, 690.0f, "Quit");
+
+	// Centering text
+	GameOperation::centerTextX(title, .5f);
+	GameOperation::centerTextX(playButton, .5f);
+	GameOperation::centerTextX(quitButton, .5f);
+	GameOperation::centerTextX(howToPlay, .5f);
+	GameOperation::centerTextX(instruction1, .5f);
+	GameOperation::centerTextX(instruction2, .5f);
+	GameOperation::centerTextX(instruction3, .5f);
+
+	GameOperation::centerTextX(replayButton, .5f);
 	
 
 	triangle.setFillColor(sf::Color::Red);
 	triangle.setPosition(sf::Vector2f(50.0f, 50.0f));
 
 	movementSelection.push_back(new Stay(textures.stayTexture, textures.staySelectedTexture));
-	movementSelection.push_back(new Back(textures.backTexture, textures.backSelectedTexture));
 	movementSelection.push_back(new LeftOrRight(textures.leftOrRightTexture, textures.leftOrRightSelectedTexture));
+	movementSelection.push_back(new Back(textures.backTexture, textures.backSelectedTexture));
 	movementSelection.push_back(new Diagonal(textures.diagonalTexture, textures.diagonalSelectedTexture));
 	movementSelection.push_back(new Super(textures.superTexture, textures.superSelectedTexture));
 }

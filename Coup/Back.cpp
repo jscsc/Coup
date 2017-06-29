@@ -13,7 +13,7 @@ bool Back::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int piec
 Back::Back(sf::Texture & baseTexture, sf::Texture & selectedTexture)
 	: Movement(Util::BACK, baseTexture, selectedTexture)
 {
-	setCost(1);
+	setCost(2);
 }
 
 Back::~Back()

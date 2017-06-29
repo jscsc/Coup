@@ -183,6 +183,26 @@ bool GameOperation::piecesRemaining(PlayerData & playerData)
 	return false;
 }
 
+void GameOperation::centerText(sf::Text & text, float percentOfWidth, float percentOfHeight)
+{
+	float x = (1024 * percentOfWidth) - (text.getLocalBounds().width / 2.0f);
+	float y = (768 * percentOfHeight) - (text.getLocalBounds().height / 2.0f);
+	text.setPosition(x, y);
+}
+
+
+void GameOperation::centerTextX(sf::Text & text, float percentOfWidth)
+{
+	float x = (1024 * percentOfWidth) - (text.getLocalBounds().width / 2.0f);
+	text.setPosition(x, text.getPosition().y);
+}
+
+void GameOperation::centerTextY(sf::Text & text, float percentOfHeight)
+{
+	float y = (768 * percentOfHeight) - (text.getLocalBounds().height / 2.0f);
+	text.setPosition(text.getPosition().x, y);
+}
+
 GameOperation::GameOperation()
 {
 

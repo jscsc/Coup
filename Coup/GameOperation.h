@@ -25,6 +25,9 @@ public:
 	static void handelPlayerMovements(PlayerData &playerData);
 	static void setText(sf::Text &text, sf::Font &gameFont, int charSize, float x, float y, const std::string &message);
 	static bool piecesRemaining(PlayerData &playerData);
+	static void centerText(sf::Text &text, float percentOfWidth, float percentOfHeight);
+	static void centerTextX(sf::Text &text, float percentOfWidth);
+	static void centerTextY(sf::Text &text, float percentOfHeight);
 
 
 private:
