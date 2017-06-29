@@ -21,7 +21,7 @@ UIData::UIData(Textures &textures, sf::Font &gameFont)
 	instr = instr + "     player with the most score after three rounds wins";
 
 
-	GameOperation::setText(title, gameFont, 128, 370.0f, 100.0f, "Coup");
+	GameOperation::setText(title, gameFont, 128, 370.0f, 100.0f, "Coups");
 	GameOperation::setText(playButton, gameFont, 24, 490.0f, 325.0f, "Play");
 	GameOperation::setText(quitButton, gameFont, 24, 490.0f, 400.0f, "Exit");
 	GameOperation::setText(howToPlay, gameFont, 24, 225.0f, 500.0f, "How To Play");

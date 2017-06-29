@@ -30,6 +30,8 @@ int main()
 	// Create Textrues
 	Textures textures;
 
+	// Test Coups
+
 	// Create player data
 	PlayerData playerData(Util::PLAYER_ONE, textures);
 	
