@@ -1,7 +1,6 @@
 #include "Ability.h"
 
 
-
 Ability::Ability() : cost(0), active(true), selected(false)
 {
 }

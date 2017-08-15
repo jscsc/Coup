@@ -66,7 +66,7 @@ void PlayerData::resetRound()
 
 void PlayerData::resetGamePieces()
 {
-	float x = 450;
+	float x = 459;
 	float y;
 	if (type == Util::PLAYER_ONE) {
 		y = 700;
@@ -83,6 +83,6 @@ void PlayerData::resetGamePieces()
 		piece->setActive(true);
 		piece->setSelected(false);
 		piece->setOnBoard(false);
-		x += 50;
+		x += 53;
 	}
 }

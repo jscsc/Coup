@@ -92,8 +92,8 @@ bool GamePiece::setOnBoard(bool onBoard)
 void GamePiece::setColor()
 {
 	if (owner == Util::PLAYER_ONE)
-		body.setFillColor(sf::Color::Red);
+		body.setFillColor(sf::Color(255, 51, 51));
 	else
-		body.setFillColor(sf::Color::Blue);
+		body.setFillColor(sf::Color(0, 191, 255));
 }
 

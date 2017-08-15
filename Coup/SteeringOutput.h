@@ -1,7 +1,7 @@
 #pragma once
-
 #include <SFML/System.hpp>
 
+// Struct to hold the output of a SteeringBehavior
 struct SteeringOutput
 {
 
@@ -23,10 +23,11 @@ struct SteeringOutput
 	// A single floating point value for angular acceleration
 	float angular;
 
+	// Constructors / Destructors
 	SteeringOutput();
-
 	~SteeringOutput();
 
+	// Operator overload to add two SteeringOutputs together
 	SteeringOutput operator+(const SteeringOutput other);
 };
 

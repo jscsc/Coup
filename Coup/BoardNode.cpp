@@ -1,7 +1,6 @@
 #include "BoardNode.h"
 #include <iostream>
 
-
 BoardNode::BoardNode() : BoardObject()
 {
 
@@ -47,7 +46,6 @@ void BoardNode::setAissignment(Util::PlayerType assignment)
 {
 	this->assignment = assignment;
 }
-
 
 void BoardNode::render(sf::RenderWindow &window)
 {

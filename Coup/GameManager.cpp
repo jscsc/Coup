@@ -25,7 +25,6 @@ void GameManager::gameLogic()
 	GameOperation::handelPlayerMovements(playerOne);
 	GameOperation::handelPlayerMovements(playerTwo);
 
-
 	switch (gameData.currentGameState)
 	{
 		case Util::MAIN_MENU:
@@ -45,7 +44,6 @@ void GameManager::gameLogic()
 			break;
 		default:
 			break;
-
 	}
 }
 
@@ -198,6 +196,7 @@ void GameManager::handelGameplayRules(PlayerData & playerData, PlayerData &other
 				float distance = GameMath::mag(direction);
 				if (distance < 5.0f) {
 					otherPiece->setActive(false);
+					otherPiece->setSelected(false);
 					otherPiece->setOnBoard(false);
 				}
 			}

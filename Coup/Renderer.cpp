@@ -73,10 +73,10 @@ void Renderer::renderAbilitySetup()
 
 	// render ready button
 	if (playerData.points >= 4)
-		UI.readyButton.render(window);
+		window.draw(UI.readyButton);
 
 	// render reset button
-	UI.resetSelectionButton.render(window);
+	window.draw(UI.resetSelectionButton);
 
 	// render current movements
 	x = 285.0f;
@@ -179,6 +179,9 @@ void Renderer::renderGameplay()
 
 void Renderer::renderGameOver()
 {
+	UI.playerScore.setString("Red Score: " + std::to_string(playerData.score));
+	UI.opponentScore.setString("Blue Score: " + std::to_string(otherPlayerData.score));
+
 	// Render Winner
 	if (playerData.score > otherPlayerData.score) {
 		UI.winner.setString("Winner");

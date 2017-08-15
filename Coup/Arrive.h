@@ -1,10 +1,10 @@
 #pragma once
 #include "SteeringBehavior.h"
 #include "Kinematic.h"
+
+// The Arrive Movement Algorithm
 class Arrive : public SteeringBehavior
 {
-
-	
 
 	// Holds the max acceleration and speed of the character
 	float maxAcceleration;
@@ -25,9 +25,12 @@ public:
 	Kinematic &character;
 	Kinematic &target;
 
+	// Constrctors and Destructors
 	Arrive(Kinematic &character, Kinematic &target, float maxAcceleration, float maxSpeed, float targetRadius, float slowRadius);
 	Arrive();
 	~Arrive();
+
+	// Returns a steering object for this particular iteration of the algorithm
 	SteeringOutput getSteering() override;
 
 };

@@ -24,8 +24,8 @@ struct UIData
 	sf::Text pointsUsed;
 	sf::Text playerScore;
 	sf::Text currentRound;
-	ToggleButton readyButton;
-	MenuButton resetSelectionButton;
+	sf::Text readyButton;
+	sf::Text resetSelectionButton;
 	sf::Text stayCost;
 	sf::Text leftOrRightCost;
 	sf::Text backCost;

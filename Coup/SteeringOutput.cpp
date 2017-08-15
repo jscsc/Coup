@@ -1,17 +1,15 @@
 #include "SteeringOutput.h"
 
-
-
 SteeringOutput::SteeringOutput() : position(0.0f, 0.0f), orientaion(0.0f), velocity(0.0f, 0.0f), rotation(0.0f), linear(0.0f, 0.0f), angular(0.0)
 {
 	
 }
 
-
 SteeringOutput::~SteeringOutput()
 {
 }
 
+// Operator overload to add two SteeringOutputs together
 SteeringOutput SteeringOutput::operator+(const SteeringOutput other)
 {
 	SteeringOutput output = SteeringOutput();

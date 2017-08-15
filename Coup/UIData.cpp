@@ -12,7 +12,7 @@
 
 
 UIData::UIData(Textures &textures, sf::Font &gameFont)
-	: readyButton(485, 200, gameFont, "Ready"), resetSelectionButton(485, 300, gameFont, "Reset"), triangle(30, 3)
+	: triangle(30, 3)
 {
 	// Instructions
 	std::string instr = "                                     How To Play\n\n";
@@ -20,14 +20,16 @@ UIData::UIData(Textures &textures, sf::Font &gameFont)
 	instr = instr + " use abilities to avoid and attack opponent game pieces\n\n";
 	instr = instr + "     player with the most score after three rounds wins";
 
+	GameOperation::setText(readyButton, gameFont, 24, 485.0f, 200.0f, "Ready");
+	GameOperation::setText(resetSelectionButton, gameFont, 24, 485.0f, 300.0f, "Reset");
 
-	GameOperation::setText(title, gameFont, 128, 370.0f, 100.0f, "Coups");
+	GameOperation::setText(title, gameFont, 128, 370.0f, 100.0f, "Coup Stick");
 	GameOperation::setText(playButton, gameFont, 24, 490.0f, 325.0f, "Play");
 	GameOperation::setText(quitButton, gameFont, 24, 490.0f, 400.0f, "Exit");
 	GameOperation::setText(howToPlay, gameFont, 24, 225.0f, 500.0f, "How To Play");
 	GameOperation::setText(instruction1, gameFont, 24, 225.0f, 550.0f, "move game pieces to the opposite end of the board to score");
-	GameOperation::setText(instruction2, gameFont, 24, 225.0f, 600.0f, "use abilities to avoid and attack opponent game pieces");
-	GameOperation::setText(instruction3, gameFont, 24, 225.0f, 650.0f, "player with the most score after three rounds wins");
+	GameOperation::setText(instruction2, gameFont, 24, 225.0f, 600.0f, "use abilities to avoid and attack opponent's game pieces");
+	GameOperation::setText(instruction3, gameFont, 24, 225.0f, 650.0f, "player with the highest score after three rounds wins");
 
 	GameOperation::setText(opponentScore, gameFont, 24, 800.0f, 50.0f, "Opt Score");
 	GameOperation::setText(playerScore, gameFont, 24, 800.0f, 100.0f, "Player Score");
@@ -63,7 +65,7 @@ UIData::UIData(Textures &textures, sf::Font &gameFont)
 	GameOperation::centerTextX(replayButton, .5f);
 	
 
-	triangle.setFillColor(sf::Color::Red);
+	triangle.setFillColor(sf::Color(255, 51, 51));
 	triangle.setPosition(sf::Vector2f(50.0f, 50.0f));
 
 	movementSelection.push_back(new Stay(textures.stayTexture, textures.staySelectedTexture));
@@ -82,12 +84,12 @@ UIData::~UIData()
 void UIData::setTriangleColor(Util::PlayerType currentTurn)
 {
 	if (currentTurn == Util::PLAYER_ONE)
-		triangle.setFillColor(sf::Color::Red);
+		triangle.setFillColor(sf::Color(255, 51, 51));
 	else
-		triangle.setFillColor(sf::Color::Blue);
+		triangle.setFillColor(sf::Color(0, 191, 255));
 }
 
 void UIData::resetAll()
 {
-	readyButton.setToggled(false);
+	//readyButton.setToggled(false);
 }

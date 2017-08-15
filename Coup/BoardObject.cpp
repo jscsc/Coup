@@ -1,7 +1,5 @@
 #include "BoardObject.h"
 
-
-
 BoardObject::BoardObject() : RenderableObject(), row(0), column(0)
 {
 
@@ -10,7 +8,6 @@ BoardObject::BoardObject() : RenderableObject(), row(0), column(0)
 BoardObject::BoardObject(int row, int column) : RenderableObject(), row(row), column(column)
 {
 }
-
 
 BoardObject::~BoardObject()
 {

@@ -26,8 +26,6 @@ PlayerManager::~PlayerManager()
 
 void PlayerManager::playerLogic()
 {
-
-	
 	if ((gameData.currentTurn == playerData.type && !playerData.pieceMoving) 
 		|| gameData.currentTurn == Util::NEUTRAL)
 		selectState();
@@ -130,8 +128,7 @@ bool PlayerManager::handelAbilitySetupReadyButton()
 	sf::Mouse::getPosition(window);
 
 
-	if (UI.readyButton.text.getGlobalBounds().contains(mousePosition) && playerData.points >= 4) {
-		UI.readyButton.setToggled(!UI.readyButton.isToggled());
+	if (UI.readyButton.getGlobalBounds().contains(mousePosition) && playerData.points >= 4) {
 		playerData.ready = !playerData.ready;
 		return true;
 	}
@@ -145,7 +142,7 @@ bool PlayerManager::handelAbilitySetupResetButton()
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
 
-	if (UI.resetSelectionButton.text.getGlobalBounds().contains(mousePosition)) {
+	if (UI.resetSelectionButton.getGlobalBounds().contains(mousePosition)) {
 		playerData.movements.clear();
 		playerData.points = 0;
 		playerData.ready = false;
@@ -342,7 +339,7 @@ bool PlayerManager::handelGamePieceSelection()
 	sf::Mouse::getPosition(window);
 
 	for (GamePiece* piece : playerData.pieces) {
-		if (piece->body.getGlobalBounds().contains(mousePosition)) {
+		if (piece->body.getGlobalBounds().contains(mousePosition) && piece->isActive()) {
 			// TODO seperate these into a function
 			// Clear any selected movements
 			GameOperation::resetBoard(gameData.nodes);

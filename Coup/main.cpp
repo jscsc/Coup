@@ -24,13 +24,14 @@
 #include <random>
 int main()
 {
-	/// INITIAL VARIABLES
-	sf::RenderWindow window(sf::VideoMode(1024, 768), "Coup");
+	// Create render window
+	sf::RenderWindow window(sf::VideoMode(1024, 768), "Coups");
+
+	// TODO Swtich over to using Delta Time to help improve performance
+	window.setFramerateLimit(500);
 
 	// Create Textrues
 	Textures textures;
-
-	// Test Coups
 
 	// Create player data
 	PlayerData playerData(Util::PLAYER_ONE, textures);
@@ -71,11 +72,12 @@ int main()
 	while (window.isOpen())
 	{
 
-		// Reset stuff
+		// Reset game items if needed
 		if (gameData.mouseClicked == true)
 			gameData.mouseClicked = false;
 
 
+		// Hanndle Events
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
