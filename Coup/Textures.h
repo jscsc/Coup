@@ -1,8 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
+// Struct to hold Textures used in the game
 struct Textures
 {
-
+	// Textures for the different Movement abilities
 	sf::Texture backTexture;
 	sf::Texture backSelectedTexture;
 
@@ -17,7 +19,6 @@ struct Textures
 
 	sf::Texture superTexture;
 	sf::Texture superSelectedTexture;
-
 
 	Textures();
 	~Textures();

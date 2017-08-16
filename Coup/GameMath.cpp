@@ -1,6 +1,5 @@
 #include "GameMath.h"
 
-
 float GameMath::mag(const sf::Vector2f vector2D)
 {
 	return sqrtf( (vector2D.x * vector2D.x) + (vector2D.y * vector2D.y) );
@@ -15,13 +14,12 @@ void GameMath::normalize(sf::Vector2f &vector2D)
 
 float GameMath::radiansToDegrees(float radians)
 {
-	return radians * (180.0f / M_PI);
+	return static_cast<float>(radians * (180.0f / M_PI));
 }
 
 GameMath::GameMath()
 {
 }
-
 
 GameMath::~GameMath()
 {

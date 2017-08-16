@@ -1,7 +1,5 @@
 #include "Stay.h"
 
-
-
 bool Stay::validatePlayerOne(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn)
 {
 	return (nodeRow == pieceRow) && (nodeColumn == pieceColumn);

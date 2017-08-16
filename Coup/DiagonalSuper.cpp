@@ -1,7 +1,5 @@
 #include "DiagonalSuper.h"
 
-
-
 bool DiagonalSuper::validatePlayerOne(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn)
 {
 	bool leftColSide = (nodeColumn == pieceColumn - 2);

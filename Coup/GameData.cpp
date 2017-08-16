@@ -1,8 +1,6 @@
 #include "GameData.h"
 #include "BoardNode.h"
 
-
-
 GameData::GameData() : currentGameState(Util::ABILITY_SETUP),
 currentTurn(Util::NEUTRAL), mouseClicked(true), exitReady(false), round(1)
 {
@@ -20,7 +18,6 @@ currentTurn(Util::NEUTRAL), mouseClicked(true), exitReady(false), round(1)
 		down += 92;
 	}
 }
-
 
 GameData::~GameData()
 {

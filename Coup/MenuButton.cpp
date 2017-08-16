@@ -1,7 +1,5 @@
 #include "MenuButton.h"
 
-
-
 MenuButton::MenuButton(float x, float y, sf::Font &gameFont, const std::string &message)
 {
 	rect.setSize(sf::Vector2f(50, 50));
@@ -15,7 +13,6 @@ MenuButton::MenuButton(float x, float y, sf::Font &gameFont, const std::string &
 	text.setPosition(sf::Vector2f(x, y));
 }
 
-
 MenuButton::~MenuButton()
 {
 }
@@ -23,5 +20,4 @@ MenuButton::~MenuButton()
 void MenuButton::render(sf::RenderWindow & window)
 {
 	window.draw(text);
-	//window.draw(rect);
 }

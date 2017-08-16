@@ -4,8 +4,12 @@
 
 // Forward declaration for struct - the more you know!
 struct SteeringOutput;
+
+// Class to hold basic kinematic data to use with SteeringBehaviors
 class Kinematic
 {
+
+	// The max speed an object can move in the game world
 	const float MAX_SPEED = 0.5f;
 
 public:
@@ -34,7 +38,7 @@ public:
 	// Update method wihtout using delta time
 	void update(const SteeringOutput &steering);
 
-	// Reset the KKinematic
+	// Reset the Kinematic
 	void reset();
 
 };

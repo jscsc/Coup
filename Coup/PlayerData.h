@@ -4,10 +4,12 @@
 #include "Movement.h"
 class GamePiece;
 struct Textures;
+
+// Struct holding Data relevant to a player
 struct PlayerData
 {
 
-	// The type of player this manager is for
+	// The type of player this struct is for
 	Util::PlayerType type;
 
 	// Points remaining for this plater
@@ -37,17 +39,29 @@ struct PlayerData
 	// List of all this player's game pieces currently on the board
 	std::vector< GamePiece* > pieces;
 
+	// List of all this player's current movements
 	std::vector< Movement* > movements;
 
+	// Default movement for this player
 	Movement defaultMovement;
 
+	// Constructors / Destructor
 	PlayerData(Util::PlayerType type, Textures &textures);
 	~PlayerData();
-	void resetCurrentMovement();
-	void setupGamePieces();
-	void resetAll();
-	void resetRound();
-	void resetGamePieces();
 
+	// Resets the current movement to the default movement
+	void resetCurrentMovement();
+
+	// Sets up the GamePieces of this player
+	void setupGamePieces();
+
+	// Resets all data for this player
+	void resetAll();
+
+	// Resets data relevant to a round for this player
+	void resetRound();
+
+	// Resets the GamePieces for this player
+	void resetGamePieces();
 };
 

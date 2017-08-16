@@ -14,8 +14,6 @@
 #include <iostream>
 #include <random>
 
-
-
 Util::MovementType GameOperation::combineMovement(Util::MovementType currentType, Util::MovementType additionalType)
 {
 	return Util::MovementType();
@@ -49,27 +47,21 @@ void GameOperation::addMovement(PlayerData &playerData, Util::MovementType type)
 	{
 		case Util::BACK:
 			playerData.movements.push_back(new Back(playerData.textures.backTexture, playerData.textures.backSelectedTexture));
-			//std::cout << "Adding Back" << std::endl;
 			break;
 		case Util::STAY:
 			playerData.movements.push_back(new Stay(playerData.textures.stayTexture, playerData.textures.staySelectedTexture));
-			//std::cout << "Adding Stay" << std::endl;
 			break;
 		case Util::LEFT_OR_RIGHT:
 			playerData.movements.push_back(new LeftOrRight(playerData.textures.leftOrRightTexture, playerData.textures.leftOrRightSelectedTexture));
-			//std::cout << "Adding Left of Right" << std::endl;
 			break;
 		case Util::DIAGONAL:
 			playerData.movements.push_back(new Diagonal(playerData.textures.diagonalTexture, playerData.textures.diagonalSelectedTexture));
-			//std::cout << "Adding Diagonal" << std::endl;
 			break;
 		case Util::SUPER:
 			playerData.movements.push_back(new Super(playerData.textures.superTexture, playerData.textures.superSelectedTexture));
-			//std::cout << "Adding Super" << std::endl;
 			break;
 		case Util::FORWARD:
 			playerData.movements.push_back(new Movement(playerData.textures.backTexture, playerData.textures.backSelectedTexture));
-			//std::cout << "Adding Forward" << std::endl;
 			break;
 		default:
 			break;
@@ -102,7 +94,6 @@ void GameOperation::executeMovement(PlayerData & playerData, BoardNode & node)
 {
 	if (playerData.currentGamePiece == nullptr)
 		return;
-
 
 	playerData.currentGamePiece->setRow(node.getRow());
 	playerData.currentGamePiece->setColumn(node.getColumn());
@@ -149,7 +140,7 @@ void GameOperation::pickRandomTurn(GameData & gameData)
 		gameData.currentTurn = Util::PLAYER_TWO;
 }
 
-void GameOperation::handelPlayerMovements(PlayerData & playerData)
+void GameOperation::handlePlayerMovements(PlayerData & playerData)
 {
 
 	// move every active player piece
@@ -190,7 +181,6 @@ void GameOperation::centerText(sf::Text & text, float percentOfWidth, float perc
 	text.setPosition(x, y);
 }
 
-
 void GameOperation::centerTextX(sf::Text & text, float percentOfWidth)
 {
 	float x = (1024 * percentOfWidth) - (text.getLocalBounds().width / 2.0f);
@@ -205,11 +195,8 @@ void GameOperation::centerTextY(sf::Text & text, float percentOfHeight)
 
 GameOperation::GameOperation()
 {
-
 }
-
 
 GameOperation::~GameOperation()
 {
-
 }

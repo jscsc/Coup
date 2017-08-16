@@ -8,50 +8,64 @@ struct PlayerData;
 struct GameData;
 struct UIData;
 class BoardNode;
+
+// Class to handle the player logic 
 class PlayerManager
 {
 
+	// Reference to player one's data 
 	PlayerData &playerData;
 
+	// Reference to player two's data
 	PlayerData &otherPlayerData;
 
+	// Reference to the overall game data
 	GameData &gameData;
 
+	// Reference to the UI data
 	UIData &UI;
 
+	// Window to render to
 	sf::RenderWindow &window;
 
-
-
 public:
+
+	// Constrctor and Destructor
 	PlayerManager(PlayerData &playerData, PlayerData &otherPlayerData, GameData &gameData, UIData &UI, sf::RenderWindow &window);
 	~PlayerManager();
 
+	// Functions to start the flow of player logic for this iteration
 	void playerLogic();
 	void selectState();
 
-	void handelPlayerMainMenu();
-	bool handelMainMenuStartButton();
-	bool handelMainMenuQuitButton();
+	// Functions to handel player logic in the Main Menu state
+	void handlePlayerMainMenu();
+	bool handleMainMenuStartButton();
+	bool handleMainMenuQuitButton();
 
-	void handelPlayerAbilitySetup();
-	bool handelAbilitySetupReadyButton();
-	bool handelAbilitySetupResetButton();
-	bool handelAbilitySetupAbilitySelection();
+	// Functions to handel player logic in the Ability Setup state
+	void handlePlayerAbilitySetup();
+	bool handleAbilitySetupReadyButton();
+	bool handleAbilitySetupResetButton();
+	bool handleAbilitySetupAbilitySelection();
 
-	void handelPlayerPositionSetup();
-	bool handelPositionSetupGamePieceSelection();
-	bool handelPositionSetupBoardNodeSelection();
+	// Functions to handel player logic in the Position Setup state
+	void handlePlayerPositionSetup();
+	bool handlePositionSetupGamePieceSelection();
+	bool handlePositionSetupBoardNodeSelection();
 
-	void handelPlayerGameplay();
-	bool handelAbilitySelection();
-	bool handelBoardNodeSelection();
-	bool handelGamePieceSelection();
+	// Functions to handel player logic in the Gameplay state
+	void handlePlayerGameplay();
+	bool handleAbilitySelection();
+	bool handleBoardNodeSelection();
+	bool handleGamePieceSelection();
 
-	void handelPlayerGameOver();
-	bool handelGameOverReplayButton();
-	bool handelGameOverMainMenuButton();
+	// Functions to handel player logic in the Game Over state
+	void handlePlayerGameOver();
+	bool handleGameOverReplayButton();
+	bool handleGameOverMainMenuButton();
 
-	bool handelQuitMatch();
+	// Handles qutting the game
+	bool handleQuitMatch();
 };
 

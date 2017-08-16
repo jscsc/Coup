@@ -71,7 +71,6 @@ int main()
 	/// GAME LOOP
 	while (window.isOpen())
 	{
-
 		// Reset game items if needed
 		if (gameData.mouseClicked == true)
 			gameData.mouseClicked = false;

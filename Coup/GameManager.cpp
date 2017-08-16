@@ -9,8 +9,6 @@
 #include <iostream>
 
 
-
-
 GameManager::GameManager(PlayerData & playerOne, PlayerData & playerTwo, GameData & gameData, UIData & UI, sf::RenderWindow & window)
 	: playerOne(playerOne), playerTwo(playerTwo), gameData(gameData), UI(UI), window(window)
 {
@@ -22,34 +20,33 @@ GameManager::~GameManager()
 
 void GameManager::gameLogic()
 {
-	GameOperation::handelPlayerMovements(playerOne);
-	GameOperation::handelPlayerMovements(playerTwo);
+	GameOperation::handlePlayerMovements(playerOne);
+	GameOperation::handlePlayerMovements(playerTwo);
 
 	switch (gameData.currentGameState)
 	{
 		case Util::MAIN_MENU:
-			handelGameMainMenu();
+			handleGameMainMenu();
 			break;
 		case Util::ABILITY_SETUP:
-			handelGameAbilitySetup();
+			handleGameAbilitySetup();
 			break;
 		case Util::POSITION_SETUP:
-			handelGamePositionSetup();
+			handleGamePositionSetup();
 			break;
 		case Util::GAMEPLAY:
-			handelGameGameplay();
+			handleGameGameplay();
 			break;
 		case Util::GAME_OVER:
-			handelGameGameOver();
+			handleGameGameOver();
 			break;
 		default:
 			break;
 	}
 }
 
-void GameManager::handelGameMainMenu()
+void GameManager::handleGameMainMenu()
 {
-	// TODO: need to redo for mutiplayer
 	if (playerOne.ready) {
 		playerOne.ready = false;
 		playerTwo.ready = false;
@@ -61,7 +58,7 @@ void GameManager::handelGameMainMenu()
 	}
 }
 
-void GameManager::handelGameAbilitySetup()
+void GameManager::handleGameAbilitySetup()
 {
 	// If both players have made their selections, move to the next state
 	if (playerOne.ready == true && playerTwo.ready == true) {
@@ -80,9 +77,8 @@ void GameManager::handelGameAbilitySetup()
 	}
 }
 
-void GameManager::handelGamePositionSetup()
+void GameManager::handleGamePositionSetup()
 {
-
 	if (gameData.exitReady) {
 		UI.resetAll();
 		playerOne.resetAll();
@@ -103,7 +99,6 @@ void GameManager::handelGamePositionSetup()
 		determineTurnComplete(playerOne);
 	else
 		determineTurnComplete(playerTwo);
-
 }
 
 void GameManager::determineTurnComplete(PlayerData & playerData)
@@ -115,7 +110,7 @@ void GameManager::determineTurnComplete(PlayerData & playerData)
 	}
 }
 
-void GameManager::handelGameGameplay()
+void GameManager::handleGameGameplay()
 {
 	if (gameData.exitReady) {
 		UI.resetAll();
@@ -125,21 +120,19 @@ void GameManager::handelGameGameplay()
 		return;
 	}
 
-	// TODO restart game when no more player pieces on board
 	if (!GameOperation::piecesRemaining(playerOne) || !GameOperation::piecesRemaining(playerTwo)) {
-		handelGameRoundOver();
+		handleGameRoundOver();
 		return;
 	}
 
 	if (gameData.currentTurn == Util::PLAYER_ONE)
-		handelGameplayRules(playerOne, playerTwo);
+		handleGameplayRules(playerOne, playerTwo);
 	else
-		handelGameplayRules(playerTwo, playerOne);
+		handleGameplayRules(playerTwo, playerOne);
 }
 
-void GameManager::handelGameGameOver()
+void GameManager::handleGameGameOver()
 {
-	// TODO redo for multiplayer
 	if (gameData.exitReady) {
 		UI.resetAll();
 		playerOne.resetAll();
@@ -154,7 +147,7 @@ void GameManager::handelGameGameOver()
 	}
 }
 
-void GameManager::handelGameRoundOver()
+void GameManager::handleGameRoundOver()
 {
 	// Count player one peices left
 	for (GamePiece *piece : playerOne.pieces) {
@@ -186,7 +179,7 @@ void GameManager::handelGameRoundOver()
 	}
 }
 
-void GameManager::handelGameplayRules(PlayerData & playerData, PlayerData &otherPlayerData)
+void GameManager::handleGameplayRules(PlayerData & playerData, PlayerData &otherPlayerData)
 {
 	// If we hit someone, handle it
 	for (GamePiece * myPiece : playerData.pieces) {
@@ -220,5 +213,4 @@ void GameManager::handelGameplayRules(PlayerData & playerData, PlayerData &other
 	}
 
 	determineTurnComplete(playerData);
-
 }

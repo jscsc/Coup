@@ -96,4 +96,3 @@ void GamePiece::setColor()
 	else
 		body.setFillColor(sf::Color(0, 191, 255));
 }
-

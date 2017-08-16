@@ -4,9 +4,7 @@
 
 Kinematic::Kinematic() : position(0.0f, 0.0f), orientation(0.0f), velocity(0.0f, 0.0f), rotation(0.0f)
 {
-
 }
-
 
 Kinematic::~Kinematic()
 {
@@ -14,7 +12,6 @@ Kinematic::~Kinematic()
 
 void Kinematic::update(const SteeringOutput & steering, const float deltaTime)
 {
-
 	// Update the position and orientation
 	position += velocity * deltaTime;
 	orientation += rotation * deltaTime;
@@ -29,7 +26,6 @@ void Kinematic::update(const SteeringOutput & steering, const float deltaTime)
 		GameMath::normalize(velocity);
 		velocity *= MAX_SPEED;
 	}
-		
 }
 
 void Kinematic::update(const SteeringOutput &steering)
@@ -42,7 +38,7 @@ void Kinematic::update(const SteeringOutput &steering)
 	velocity += steering.linear;
 	rotation += steering.angular;
 
-	// cap the velocity and rotation
+	// Cap the velocity and rotation
 	if (GameMath::mag(velocity) > MAX_SPEED)
 	{
 		GameMath::normalize(velocity);

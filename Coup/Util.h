@@ -1,5 +1,6 @@
 #pragma once
 
+// Namespace to hold enums used by the game
 namespace Util
 {
 	enum PlayerType { PLAYER_ONE, PLAYER_TWO, NEUTRAL };

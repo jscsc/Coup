@@ -6,7 +6,6 @@
 #include "GamePiece.h"
 #include <iostream>
 
-
 Renderer::Renderer(PlayerData & playerData, PlayerData &otherPlayerData, GameData & gameData, UIData & UI, sf::RenderWindow & window) :
 	playerData(playerData), otherPlayerData(otherPlayerData), gameData(gameData), UI(UI), window(window)
 {
@@ -185,17 +184,13 @@ void Renderer::renderGameOver()
 	// Render Winner
 	if (playerData.score > otherPlayerData.score) {
 		UI.winner.setString("Winner");
-		//UI.winner.setPosition(sf::Vector2f(320.0f, 100.0f));
 	} else if (playerData.score < otherPlayerData.score) {
 		UI.winner.setString("Loser");
-		//UI.winner.setPosition(sf::Vector2f(370.0f, 100.0f));
 	} else {
 		UI.winner.setString("Tie");
-		//UI.winner.setPosition(sf::Vector2f(430.0f, 100.0f));
 	}
 
 	GameOperation::centerTextX(UI.winner, .5f);
-
 
 	window.draw(UI.winner);
 

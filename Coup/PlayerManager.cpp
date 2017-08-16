@@ -17,7 +17,6 @@
 PlayerManager::PlayerManager(PlayerData & playerData, PlayerData &otherPlayerData, GameData & gameData, UIData &UI, sf::RenderWindow &window) :
 	playerData(playerData), otherPlayerData(otherPlayerData), gameData(gameData), UI(UI) ,window(window)
 {
-
 }
 
 PlayerManager::~PlayerManager()
@@ -36,42 +35,39 @@ void PlayerManager::selectState()
 	switch (gameData.currentGameState)
 	{
 		case Util::MAIN_MENU:
-			handelPlayerMainMenu();
+			handlePlayerMainMenu();
 			break;
 		case Util::ABILITY_SETUP:
-			handelPlayerAbilitySetup();
+			handlePlayerAbilitySetup();
 			break;
 		case Util::POSITION_SETUP:
-			handelPlayerPositionSetup();
+			handlePlayerPositionSetup();
 			break;
 		case Util::GAMEPLAY:
-			handelPlayerGameplay();
+			handlePlayerGameplay();
 			break;
 		case Util::GAME_OVER:
-			handelPlayerGameOver();
+			handlePlayerGameOver();
 			break;
 		default:
 			break;
-
 	}
 }
 
-void PlayerManager::handelPlayerMainMenu()
+void PlayerManager::handlePlayerMainMenu()
 {
-
 	// Be sure the player actually clicked something;
 	if (!gameData.mouseClicked || gameData.currentTurn != Util::NEUTRAL)
 		return;
 
-	if (handelMainMenuStartButton())
+	if (handleMainMenuStartButton())
 		return;
 
-	if (handelMainMenuQuitButton())
+	if (handleMainMenuQuitButton())
 		return;
-
 }
 
-bool PlayerManager::handelMainMenuStartButton()
+bool PlayerManager::handleMainMenuStartButton()
 {
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
@@ -84,7 +80,7 @@ bool PlayerManager::handelMainMenuStartButton()
 	return false;
 }
 
-bool PlayerManager::handelMainMenuQuitButton()
+bool PlayerManager::handleMainMenuQuitButton()
 {
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
@@ -98,35 +94,30 @@ bool PlayerManager::handelMainMenuQuitButton()
 }
 
 
-void PlayerManager::handelPlayerAbilitySetup()
+void PlayerManager::handlePlayerAbilitySetup()
 {
-	
-
 	// Be sure the player actually clicked something;
 	if (!gameData.mouseClicked || gameData.currentTurn != Util::NEUTRAL)
 		return;
 
-	if (handelQuitMatch())
-		return;
-
-	//std::cout << "Got here" << std::endl;
-	
-	if (handelAbilitySetupReadyButton())
+	if (handleQuitMatch())
 		return;
 	
-	if (handelAbilitySetupResetButton())
+	if (handleAbilitySetupReadyButton())
+		return;
+	
+	if (handleAbilitySetupResetButton())
 		return;
 
-	if (handelAbilitySetupAbilitySelection())
+	if (handleAbilitySetupAbilitySelection())
 		return;
 	
 }
 
-bool PlayerManager::handelAbilitySetupReadyButton()
+bool PlayerManager::handleAbilitySetupReadyButton()
 {
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
-
 
 	if (UI.readyButton.getGlobalBounds().contains(mousePosition) && playerData.points >= 4) {
 		playerData.ready = !playerData.ready;
@@ -136,7 +127,7 @@ bool PlayerManager::handelAbilitySetupReadyButton()
 	return false;
 }
 
-bool PlayerManager::handelAbilitySetupResetButton()
+bool PlayerManager::handleAbilitySetupResetButton()
 {
 
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
@@ -152,13 +143,12 @@ bool PlayerManager::handelAbilitySetupResetButton()
 	return false;
 }
 
-bool PlayerManager::handelAbilitySetupAbilitySelection()
+bool PlayerManager::handleAbilitySetupAbilitySelection()
 {
 	// If we already have too many abilities, don't add
 	if (playerData.points >= 4)
 		return false;
 
-	// TODO look over again
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
 
@@ -177,17 +167,15 @@ bool PlayerManager::handelAbilitySetupAbilitySelection()
 	return false;
 }
 
-void PlayerManager::handelPlayerPositionSetup()
+void PlayerManager::handlePlayerPositionSetup()
 {
 
 	// If not our turn, don't be here
 	if (gameData.currentTurn != playerData.type)
 		return;
 
-	if (handelQuitMatch())
+	if (handleQuitMatch())
 		return;
-
-	//std::cout << "Player pieces assigned: " << playerData.assignedPieces << std::endl;
 
 	// If we have already assigned all our pieces, no reason to be here
 	if (GameOperation::piecesAssigned(playerData)) {
@@ -204,14 +192,14 @@ void PlayerManager::handelPlayerPositionSetup()
 	if (!gameData.mouseClicked)
 		return;
 
-	if (handelPositionSetupGamePieceSelection())
+	if (handlePositionSetupGamePieceSelection())
 		return;
 
-	if (handelPositionSetupBoardNodeSelection())
+	if (handlePositionSetupBoardNodeSelection())
 		return;
 }
 
-bool PlayerManager::handelPositionSetupGamePieceSelection()
+bool PlayerManager::handlePositionSetupGamePieceSelection()
 {
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
@@ -229,7 +217,7 @@ bool PlayerManager::handelPositionSetupGamePieceSelection()
 	return false;
 }
 
-bool PlayerManager::handelPositionSetupBoardNodeSelection()
+bool PlayerManager::handlePositionSetupBoardNodeSelection()
 {
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
@@ -238,7 +226,6 @@ bool PlayerManager::handelPositionSetupBoardNodeSelection()
 		if (node.body.getGlobalBounds().contains(mousePosition) && playerData.currentGamePiece != nullptr && node.isValid()) {
 			GameOperation::resetBoard(gameData.nodes);
 			
-			//GameOperation::unassignNode(playerData.currentGamePiece->getRow(), playerData.currentGamePiece->getColumn(), gameData);
 			GameOperation::executeMovement(playerData, node);
 			playerData.currentGamePiece->setSelected(false);
 			playerData.currentGamePiece->setOnBoard(true);
@@ -250,9 +237,9 @@ bool PlayerManager::handelPositionSetupBoardNodeSelection()
 	return false;
 }
 
-void PlayerManager::handelPlayerGameplay()
+void PlayerManager::handlePlayerGameplay()
 {
-	if (handelQuitMatch())
+	if (handleQuitMatch())
 		return;
 
 	// If not our turn, don't be here
@@ -264,20 +251,20 @@ void PlayerManager::handelPlayerGameplay()
 		return;
 
 	// Check and see if any nodes have been clicked on
-	if (handelBoardNodeSelection())
+	if (handleBoardNodeSelection())
 		return;
 
 	// Check and see if the player has updated their abilities
-	if (handelAbilitySelection())
+	if (handleAbilitySelection())
 		return;
 
 	// Check and see if the player updated their current gamePiece
-	if (handelGamePieceSelection())
+	if (handleGamePieceSelection())
 		return;
 
 }
 
-bool PlayerManager::handelAbilitySelection()
+bool PlayerManager::handleAbilitySelection()
 {
 	if (playerData.currentGamePiece == nullptr)
 		return false;
@@ -308,7 +295,7 @@ bool PlayerManager::handelAbilitySelection()
 	return false;
 }
 
-bool PlayerManager::handelBoardNodeSelection()
+bool PlayerManager::handleBoardNodeSelection()
 {
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
@@ -332,7 +319,7 @@ bool PlayerManager::handelBoardNodeSelection()
 	return false;
 }
 
-bool PlayerManager::handelGamePieceSelection()
+bool PlayerManager::handleGamePieceSelection()
 {
 
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
@@ -362,20 +349,20 @@ bool PlayerManager::handelGamePieceSelection()
 	return false;
 }
 
-void PlayerManager::handelPlayerGameOver()
+void PlayerManager::handlePlayerGameOver()
 {
 	// Be sure the player actually clicked something;
 	if (!gameData.mouseClicked || gameData.currentTurn != Util::NEUTRAL)
 		return;
 
-	if (handelGameOverReplayButton())
+	if (handleGameOverReplayButton())
 		return;
 
-	if (handelGameOverMainMenuButton())
+	if (handleGameOverMainMenuButton())
 		return;
 }
 
-bool PlayerManager::handelGameOverReplayButton()
+bool PlayerManager::handleGameOverReplayButton()
 {
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
@@ -388,7 +375,7 @@ bool PlayerManager::handelGameOverReplayButton()
 	return false;
 }
 
-bool PlayerManager::handelGameOverMainMenuButton()
+bool PlayerManager::handleGameOverMainMenuButton()
 {
 	sf::Vector2f &mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
 	sf::Mouse::getPosition(window);
@@ -401,7 +388,7 @@ bool PlayerManager::handelGameOverMainMenuButton()
 	return false;
 }
 
-bool PlayerManager::handelQuitMatch()
+bool PlayerManager::handleQuitMatch()
 {
 	if (!gameData.mouseClicked)
 		return false;

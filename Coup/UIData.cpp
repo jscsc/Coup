@@ -9,8 +9,6 @@
 #include "GameOperation.h"
 #include <string>
 
-
-
 UIData::UIData(Textures &textures, sf::Font &gameFont)
 	: triangle(30, 3)
 {
@@ -61,10 +59,8 @@ UIData::UIData(Textures &textures, sf::Font &gameFont)
 	GameOperation::centerTextX(instruction1, .5f);
 	GameOperation::centerTextX(instruction2, .5f);
 	GameOperation::centerTextX(instruction3, .5f);
-
 	GameOperation::centerTextX(replayButton, .5f);
 	
-
 	triangle.setFillColor(sf::Color(255, 51, 51));
 	triangle.setPosition(sf::Vector2f(50.0f, 50.0f));
 
@@ -74,7 +70,6 @@ UIData::UIData(Textures &textures, sf::Font &gameFont)
 	movementSelection.push_back(new Diagonal(textures.diagonalTexture, textures.diagonalSelectedTexture));
 	movementSelection.push_back(new Super(textures.superTexture, textures.superSelectedTexture));
 }
-
 
 UIData::~UIData()
 {
@@ -91,5 +86,6 @@ void UIData::setTriangleColor(Util::PlayerType currentTurn)
 
 void UIData::resetAll()
 {
+	// Not needed atm
 	//readyButton.setToggled(false);
 }

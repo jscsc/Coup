@@ -5,7 +5,6 @@
 
 Textures::Textures()
 {
-	
 	// Load Back Textures
 	if (!backTexture.loadFromFile("Assets//Textures//Back.png"))
 		throw "Texture failed to load";
@@ -38,7 +37,6 @@ Textures::Textures()
 	if (!superSelectedTexture.loadFromFile("Assets//Textures//SuperSelected.png"))
 		throw "Texture failed to load";
 }
-
 
 Textures::~Textures()
 {

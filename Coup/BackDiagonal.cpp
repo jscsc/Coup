@@ -1,7 +1,5 @@
 #include "BackDiagonal.h"
 
-
-
 bool BackDiagonal::validatePlayerOne(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn)
 {
 	bool rightColSide = (nodeColumn == pieceColumn - 1);
@@ -17,7 +15,6 @@ bool BackDiagonal::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, 
 	bool row = (nodeRow == pieceRow - 1);
 	return row && (leftColSide || rightColSide);
 }
-
 
 BackDiagonal::BackDiagonal(sf::Texture & baseTexture, sf::Texture & selectedTexture)
 	: Movement(Util::BACK_DIAGONAL, baseTexture, selectedTexture)

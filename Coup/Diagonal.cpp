@@ -1,7 +1,5 @@
 #include "Diagonal.h"
 
-
-
 bool Diagonal::validatePlayerOne(int nodeRow, int nodeColumn, int pieceRow, int pieceColumn)
 {
 	bool leftColSide = (nodeColumn == pieceColumn - 1);
@@ -17,7 +15,6 @@ bool Diagonal::validatePlayerTwo(int nodeRow, int nodeColumn, int pieceRow, int 
 	bool row = (nodeRow == pieceRow + 1);
 	return row && (leftColSide || rightColSide);
 }
-
 
 Diagonal::Diagonal(sf::Texture & baseTexture, sf::Texture & selectedTexture)
 	: Movement(Util::DIAGONAL, baseTexture, selectedTexture)
