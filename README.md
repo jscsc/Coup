@@ -10,4 +10,5 @@ The goal of the game is to get as many game pieces as possible to the other side
 
 ## Credits:
 Jacob Stone - Creator, Designer, Programmer, Art
+
 Amanda Williams - Art
